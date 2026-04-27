@@ -1,0 +1,12 @@
+.env
+data/raw/
+data/normalized/
+output/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+venv/
+*.mp3
+*.wav
+*.mp4

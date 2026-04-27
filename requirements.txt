@@ -1,0 +1,10 @@
+anthropic>=0.40.0
+google-api-python-client>=2.100.0
+youtube-transcript-api>=0.6.2
+instaloader>=4.10
+yt-dlp>=2024.1.0
+openai-whisper>=20231117
+duckduckgo-search>=4.1.1
+python-dotenv>=1.0.0
+pytest>=8.0.0
+pytest-mock>=3.12.0
