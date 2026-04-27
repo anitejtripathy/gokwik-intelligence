@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoKwik Social Intelligence</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav>
+  <a class="brand" href="index.html">GoKwik Intelligence</a>
+  <a href="index.html" class="active">Overview</a>
+  <a href="agency.html">Agency Model</a>
+  <a href="content.html">Content</a>
+  <a href="audience.html">Audience</a>
+  <a href="value-map.html">Value Map</a>
+  <a href="engagement.html">Engagement</a>
+</nav>
+<div class="container">
+  <h1>GoKwik Social Intelligence Brief</h1>
+  <p class="subtitle">Competitive analysis of GoKwik's creator agency partnership across YouTube &amp; Instagram</p>
+  <div class="stat-grid" id="stats"></div>
+  <h2>Executive Summary</h2>
+  <div class="card" id="exec-summary"><p>Loading...</p></div>
+  <h2>Strategic Assessment</h2>
+  <div class="card" id="assessment"><p>Loading...</p></div>
+</div>
+<script>
+async function loadData() {
+  const [eng, audience, value] = await Promise.all([
+    fetch('data/engagement_stats.json').then(r => r.json()),
+    fetch('data/audience_profile.json').then(r => r.json()),
+    fetch('data/gokwik_value_map.json').then(r => r.json()),
+  ]);
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-card"><div class="value">${(eng.total_estimated_reach||0).toLocaleString()}</div><div class="label">Total Estimated Reach</div></div>
+    <div class="stat-card"><div class="value">${eng.total_post_count||0}</div><div class="label">Total Posts Analyzed</div></div>
+    <div class="stat-card"><div class="value">${audience.d2c_brand_count||0}</div><div class="label">D2C Brands Engaged</div></div>
+    <div class="stat-card"><div class="value">${(audience.intent_signal_comments||[]).length}</div><div class="label">High-Intent Comments</div></div>
+    <div class="stat-card"><div class="value">${(value.benefits||[]).length}</div><div class="label">GoKwik Benefit Types</div></div>
+    <div class="stat-card"><div class="value">${audience.merchant_individual_count||0}</div><div class="label">Merchant Individuals</div></div>
+  `;
+  document.getElementById('assessment').innerHTML = `<p>${value.overall_strategic_assessment || 'No assessment available'}</p>`;
+  try {
+    const agency = await fetch('data/agency_context.json').then(r => r.json());
+    document.getElementById('exec-summary').innerHTML = `<p>${agency.business_model_summary}</p>
+      <ul class="summary-list">${(agency.what_gokwik_gets||[]).map(g => `<li>${g}</li>`).join('')}</ul>`;
+  } catch(e) {}
+}
+loadData();
+</script>
+</body>
+</html>
