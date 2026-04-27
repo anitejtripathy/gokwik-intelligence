@@ -11,4 +11,8 @@ def save_normalized(items: list[ContentItem], path: str = "data/normalized/conte
 
 
 def load_normalized(path: str = "data/normalized/content_items.json") -> list[dict]:
-    return json.loads(Path(path).read_text())
+    p = Path(path)
+    if not p.exists():
+        print(f"[Normalizer] Warning: {path} not found — returning empty list")
+        return []
+    return json.loads(p.read_text())

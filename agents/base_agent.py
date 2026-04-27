@@ -31,4 +31,9 @@ class BaseAgent:
         match = re.search(r"```(?:json)?\s*([\s\S]+?)\s*```", text)
         if match:
             text = match.group(1)
-        return json.loads(text.strip())
+        try:
+            return json.loads(text.strip())
+        except json.JSONDecodeError as e:
+            print(f"[BaseAgent] Failed to parse JSON response: {e}")
+            print(f"[BaseAgent] Raw response (first 500 chars): {text[:500]}")
+            raise
