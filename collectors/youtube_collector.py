@@ -22,7 +22,10 @@ class YouTubeCollector:
         resp = self.service.channels().list(
             part="snippet,statistics", id=channel_id
         ).execute()
-        meta = resp["items"][0]
+        items = resp.get("items", [])
+        if not items:
+            raise ValueError(f"Channel {channel_id} not found or returned no data")
+        meta = items[0]
         path = self.output_dir / "channel_meta.json"
         path.write_text(json.dumps(meta, indent=2))
         return meta
@@ -66,7 +69,8 @@ class YouTubeCollector:
                 params["pageToken"] = page_token
             try:
                 resp = self.service.commentThreads().list(**params).execute()
-            except Exception:
+            except Exception as e:
+                print(f"[YouTube] Error fetching comments for {video_id}: {e}")
                 break
             for item in resp.get("items", []):
                 s = item["snippet"]["topLevelComment"]["snippet"]
@@ -90,6 +94,10 @@ class YouTubeCollector:
             path.write_text(text)
             return text
         except (NoTranscriptFound, TranscriptsDisabled):
+            print(f"[YouTube] No transcript available for {video_id}")
+            return None
+        except Exception as e:
+            print(f"[YouTube] Error fetching transcript for {video_id}: {e}")
             return None
 
     def collect_all(self, channel_id: str) -> list[ContentItem]:
@@ -104,7 +112,8 @@ class YouTubeCollector:
         items = []
         for video in videos:
             vid_id = video.get("id", "")
-            print(f"[YouTube] Processing {vid_id}: {video['snippet']['title'][:50]}")
+            title = video.get('snippet', {}).get('title', 'unknown')[:50]
+            print(f"[YouTube] Processing {vid_id}: {title}")
             comments = self.fetch_comments(vid_id)
             transcript = self.fetch_transcript(vid_id)
             item = normalize_youtube_video(video, comments, transcript)
