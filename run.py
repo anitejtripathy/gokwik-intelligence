@@ -157,7 +157,7 @@ def stage3_report(agency_context, content_themes, audience_profile, gokwik_value
     )
     SiteGenerator(
         agent_output_dir=str(AGENT_OUTPUT_DIR),
-        site_data_dir="site/data"
+        site_data_dir="docs/data"
     ).generate()
     print("\n[run] Pipeline complete!")
     print("  Brief:       output/brief.md")

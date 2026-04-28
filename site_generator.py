@@ -16,7 +16,7 @@ class SiteGenerator:
     def __init__(
         self,
         agent_output_dir: str = "data/normalized",
-        site_data_dir: str = "site/data",
+        site_data_dir: str = "docs/data",
     ):
         self.agent_output_dir = Path(agent_output_dir)
         self.site_data_dir = Path(site_data_dir)
