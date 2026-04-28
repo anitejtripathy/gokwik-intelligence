@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GoKwik Intelligence — Leadership Brief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"><\/script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </head>
 <body>
 <nav>
@@ -250,6 +253,6 @@ fetch('data/engagement_stats.json').then(r=>r.json()).then(eng=>{
   new Chart(document.getElementById('eng-chart'),{type:'bar',data:{labels:lbl,datasets:[{data:th.map(([,v])=>(v.avg_engagement_rate*100).toFixed(2)),backgroundColor:clr,borderRadius:2}]},options:{...co,indexAxis:'y'}});
   document.getElementById('theme-legend').innerHTML=th.map(([k,v])=>`<div class="insight-cell"><div class="insight-dot" style="background:${TC[k]||M}"></div><div><div class="insight-name">${k.replace(/_/g,' ')}</div><div class="insight-stats">${v.post_count} posts</div></div></div>`).join('');
 });
-<\/script>
+</script>
 </body>
 </html>
