@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GoKwik Intelligence — Leadership Brief</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Leadership Brief — GoKwik Intelligence</title>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="assets/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4" defer></script>
 </head>
 <body>
 <nav>
@@ -16,6 +14,7 @@
   <a href="index.html" class="active">Brief</a>
   <a href="agency.html">Agency Model</a>
   <a href="channels.html">Channels</a>
+  <a href="razorpay-gap.html">Razorpay Gap</a>
   <a href="content.html">Content</a>
   <a href="audience.html">Audience</a>
   <a href="value-map.html">Value Map</a>
@@ -23,43 +22,46 @@
 </nav>
 
 <div class="page-hero">
-  <div class="eyebrow">Razorpay Domestic Payments · Competitive Intelligence · April 2025</div>
+  <div class="eyebrow">Razorpay Domestic Payments &middot; Competitive Intelligence &middot; April 2025</div>
   <h1>How GoKwik Built a<br><em>31.5M-View Merchant Acquisition Engine</em><br>Without Running a Single Ad</h1>
   <p style="margin-top:1.25rem;max-width:700px;font-size:1rem;color:var(--muted);line-height:1.8;">
-    A structured investigation into GoKwik's creator agency partnership with GrowKwik — and what it means for Magic Checkout's merchant acquisition funnel.
+    A structured investigation into GoKwik&#x2019;s creator-led content strategy &mdash; and what it means for Magic Checkout&#x2019;s merchant acquisition funnel.
+  </p>
+  <p style="margin-top:0.5rem;font-family:var(--mono);font-size:0.65rem;color:var(--muted-2);letter-spacing:0.08em;text-transform:uppercase;">
+    Scope: YouTube only (free API). GoKwik also runs the same playbook on Instagram &mdash; not yet analyzed.
   </p>
 </div>
 
 <div class="container">
 
   <div class="section">
-    <div class="label">Origin · How This Investigation Started</div>
+    <div class="label">Origin &middot; How This Investigation Started</div>
     <h2>Why I Started Looking Into This</h2>
     <div class="story-block">
       <div class="story-num">01</div>
       <div class="story-text">
-        <p>I've been following <strong>Varun Maya's channels</strong> for a while — primarily for AI and D2C content. He runs a network of educational short-form videos: clean storytelling, scenario-driven hooks, consistently high production quality. It became a regular habit.</p>
+        <p>I&#x2019;ve been following <strong>Varun Maya&#x2019;s channels</strong> for a while &mdash; primarily for AI and D2C content. His network runs educational short-form videos with clean storytelling, scenario-driven hooks, and consistently high production quality. It became a regular habit.</p>
       </div>
     </div>
     <div class="story-block">
       <div class="story-num">02</div>
       <div class="story-text">
-        <p>Over time, I noticed something odd. <strong>Across multiple channels I followed — on entirely different topics — the production style was identical.</strong> Same narrative arc: open with a protagonist, build tension around a problem, reveal a "secret" tool mid-story, close with a keyword comment CTA. Same pacing. Same scenario illustrations and visual flows. Too consistent to be coincidence.</p>
-        <p>Someone was running a content factory.</p>
+        <p>Over time, I noticed something odd. <strong>Across multiple channels I followed &mdash; on entirely different topics &mdash; the production style was identical.</strong> Same arc: open with a protagonist, build tension around a problem, reveal a &#x201C;secret&#x201D; tool mid-story, close with a keyword comment CTA. Same pacing. Same visual flows.</p>
+        <p>Too consistent to be coincidence. Someone was running a content factory.</p>
       </div>
     </div>
     <div class="story-block">
       <div class="story-num">03</div>
       <div class="story-text">
-        <p>When I came across the <strong>GrowKwik channel</strong> — "India's #1 D2C content channel" — the pattern clicked. Same playbook. Protagonist-led narratives. And the product embedded in every checkout story was GoKwik's app.</p>
-        <p><em>This wasn't a content creator with a sponsor. This was a production agency running a channel on behalf of a brand client.</em></p>
+        <p>When I came across the <strong>GrowKwik channel</strong> &mdash; positioned as &#x201C;India&#x2019;s #1 D2C channel&#x201D; &mdash; the pattern clicked. Same playbook. Same protagonist-led narratives. And the product embedded in every checkout story was GoKwik&#x2019;s app.</p>
+        <p><em>This wasn&#x2019;t a creator with a sponsor. This was a content-led education platform GoKwik built internally &mdash; powered by their Chief Growth Officer Vargab Bakshi (formerly Shopify India).</em></p>
       </div>
     </div>
     <div class="story-block">
       <div class="story-num">04</div>
       <div class="story-text">
-        <p>That's when I went deeper. I pulled <strong>600 videos</strong> across the GrowKwik agency channel and GoKwik's own brand channel, ran them through five Claude analysis agents, and mapped exactly what GoKwik is getting from this arrangement — and what it means for Magic Checkout.</p>
-        <p><strong>The findings are worth leadership's attention.</strong></p>
+        <p>I pulled <strong>600 videos</strong> from GrowKwik (the education channel, 298 videos) and GoKwik&#x2019;s own brand channel (302 videos). Five Claude AI agents ran the analysis: an Agency Model Agent traced the content strategy and business model; a Content Theme Agent classified every video; an Audience Intelligence Agent mapped who was engaging; a GoKwik Benefits Agent quantified what GoKwik was extracting; and an Engagement Agent computed the performance metrics.</p>
+        <p>The results were then compiled into this report and published here. <strong>The findings are worth leadership&#x2019;s attention.</strong></p>
       </div>
     </div>
   </div>
@@ -73,32 +75,32 @@
       <div class="stat-cell gold">
         <span class="stat-num">31.5M</span>
         <span class="stat-name">Total Views</span>
-        <span class="stat-sub">600 videos · compounding daily</span>
+        <span class="stat-sub">YouTube only &middot; compounding daily &middot; Instagram not yet counted</span>
       </div>
       <div class="stat-cell">
         <span class="stat-num">600</span>
         <span class="stat-name">Videos Analyzed</span>
-        <span class="stat-sub">298 GrowKwik agency · 302 GoKwik brand</span>
+        <span class="stat-sub">298 GrowKwik education channel &middot; 302 GoKwik brand channel</span>
       </div>
       <div class="stat-cell">
         <span class="stat-num">97</span>
         <span class="stat-name">GoKwik Feature Pushes</span>
-        <span class="stat-sub">Embedded as organic discovery — never disclosed as ads</span>
+        <span class="stat-sub">Embedded as organic discovery &mdash; never disclosed as ads</span>
       </div>
       <div class="stat-cell">
-        <span class="stat-num">474</span>
-        <span class="stat-name">Thought Leadership Posts</span>
-        <span class="stat-sub">56,663 avg views · building category ownership</span>
+        <span class="stat-num">500K+</span>
+        <span class="stat-name">Cumulative Followers</span>
+        <span class="stat-sub">YouTube + Instagram combined</span>
       </div>
       <div class="stat-cell">
         <span class="stat-num" style="color:var(--warn)">4.22%</span>
         <span class="stat-name">Peak Engagement Rate</span>
-        <span class="stat-sub">Merchant testimonials — highest conviction content</span>
+        <span class="stat-sub">Merchant testimonials &mdash; highest conviction content</span>
       </div>
       <div class="stat-cell">
-        <span class="stat-num">200-800</span>
+        <span class="stat-num">200&#x2013;800</span>
         <span class="stat-name">Warm Leads / Video</span>
-        <span class="stat-sub">UTM-tracked DM funnels per GoKwik integration video</span>
+        <span class="stat-sub">UTM-tracked DM funnels per GoKwik integration</span>
       </div>
     </div>
   </div>
@@ -108,49 +110,59 @@
     <h2>The Threat in One Paragraph</h2>
     <div class="card card-gold">
       <p style="font-size:1rem;color:var(--text);line-height:1.9;">
-        GoKwik has commissioned a structured, full-funnel content operation through GrowKwik, spanning <strong>97 dedicated feature-push posts</strong> and <strong>474 thought-leadership posts</strong> generating an estimated <strong>31.5 million total views</strong>. The content intercepts D2C founders <em>before they enter any vendor consideration process</em>, educating them on checkout friction and COD risk using GoKwik-framed narratives, then converting problem-aware viewers into warm app install leads via a keyword comment-to-DM funnel with UTM-tracked Shopify App Store links. <strong>By the time a founder begins evaluating solutions, GoKwik's framing is already the reference frame.</strong> Magic Checkout competes at the product evaluation stage. GoKwik is winning the stage before that.
+        GoKwik has built a content-led education platform &mdash; GrowKwik &mdash; spanning <strong>97 dedicated feature-push posts</strong> and <strong>474 thought-leadership posts</strong> generating an estimated <strong>31.5 million total views on YouTube alone</strong> (Instagram not yet analyzed). The content intercepts D2C founders <em>before they enter any vendor consideration process</em>, educating them on checkout friction and COD risk using GoKwik-framed narratives, then converting problem-aware viewers into warm app install leads via a keyword comment-to-DM funnel with UTM-tracked Shopify App Store links. <strong>By the time a founder begins evaluating solutions, GoKwik&#x2019;s framing is already the reference frame.</strong> Magic Checkout competes at the product evaluation stage. GoKwik is winning the stage before that.
       </p>
     </div>
   </div>
 
   <div class="section">
-    <div class="label">Methodology</div>
-    <h2>The Agency Content Playbook</h2>
+    <div class="label">The Subliminal Risk</div>
+    <h2>It&#x2019;s Not Just Merchants &mdash; It&#x2019;s End Consumers Too</h2>
+    <div class="card" style="border-color:rgba(184,120,32,0.4);background:rgba(184,120,32,0.05)">
+      <p style="font-size:0.95rem;color:var(--text);line-height:1.85;">
+        As GoKwik grows its merchant base through this content engine, its checkout experience appears more frequently across D2C brands that consumers shop from. <strong>End consumers begin seeing the GoKwik checkout UI on brand after brand</strong> &mdash; and this repetition builds subliminal familiarity. Currently, Razorpay&#x2019;s checkout brand is the most recognised in the Indian D2C space. But if GoKwik&#x2019;s content engine accelerates merchant adoption, that recognition gap narrows. <em>By the time a consumer notices, GoKwik&#x2019;s checkout already feels familiar.</em>
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="label">Content Playbook</div>
+    <h2>The Four-Step Content Machine</h2>
     <div class="playbook">
       <div class="play-step">
         <span class="play-n">Step 01</span>
         <span class="play-icon">&#x1F3A3;</span>
         <div class="play-title">3-Second Hook</div>
-        <div class="play-body">"This founder got a UTI and built a &#x20B9;100Cr business" — visceral, relatable opener optimised for the Shorts algorithm scroll-stop rate.</div>
+        <div class="play-body">Visceral, relatable opener optimised for the Shorts algorithm scroll-stop rate. Never leads with the product.</div>
       </div>
       <div class="play-step">
         <span class="play-n">Step 02</span>
         <span class="play-icon">&#x1F464;</span>
         <div class="play-title">Protagonist Narrative</div>
-        <div class="play-body">Named founder (Seema, Nia — often fictional). Builds parasocial trust across 60–150 seconds before the product ever appears.</div>
+        <div class="play-body">Named founder (Seema, Nia &mdash; often fictional). Builds parasocial trust across 60&ndash;150 seconds before the product appears.</div>
       </div>
       <div class="play-step">
         <span class="play-n">Step 03</span>
         <span class="play-icon">&#x1F50D;</span>
-        <div class="play-title">GoKwik "Discovered"</div>
+        <div class="play-title">GoKwik &#x201C;Discovered&#x201D;</div>
         <div class="play-body">Product embedded mid-narrative as something the protagonist naturally found. Never disclosed as a paid placement. Zero ad scepticism triggered.</div>
       </div>
       <div class="play-step">
         <span class="play-n">Step 04</span>
         <span class="play-icon">&#x1F4AC;</span>
-        <div class="play-title">Keyword CTA to DM</div>
-        <div class="play-body">"Comment COD" triggers an automated DM with the Shopify App Store link and utm_campaign=KwikCODapp. Self-qualified warm lead captured.</div>
+        <div class="play-title">Keyword CTA &rarr; DM</div>
+        <div class="play-body">&#x201C;Comment COD&#x201D; &rarr; automated DM with Shopify App Store link and <span style="font-family:var(--mono);font-size:0.78em;color:var(--gold)">utm_campaign=KwikCODapp</span>. Self-qualified warm lead captured.</div>
       </div>
     </div>
     <div class="callout">
-      <strong>The mechanism:</strong> Every commenter is a self-sorted D2C founder actively signalling install intent — a higher quality lead than a paid ad click, at zero marginal media cost per lead.
+      <strong>Result:</strong> Every commenter is a self-sorted D2C founder actively signalling install intent &mdash; a higher quality lead than a paid ad click, at zero marginal media cost per lead.
     </div>
   </div>
 
   <div class="section">
     <div class="label">Content Analysis</div>
     <h2>What Performs and What Converts</h2>
-    <p style="max-width:680px;margin-bottom:1.5rem;">Brand integration posts dominate on reach (114K avg views). Merchant testimonials dominate on engagement (4.22%). GoKwik feature-push posts underperform on both — but the DM funnel extracts high-intent leads regardless of view count.</p>
+    <p style="max-width:680px;margin-bottom:1.5rem;">Brand integration posts dominate on reach (114K avg views). Merchant testimonials dominate on engagement (4.22%). GoKwik feature-push posts underperform on both &mdash; but the DM funnel extracts high-intent leads regardless of view count.</p>
     <div class="chart-grid">
       <div class="chart-box">
         <h3>Avg Views by Content Theme</h3>
@@ -165,34 +177,34 @@
   </div>
 
   <div class="section">
-    <div class="label">Strategic Risk Magic Checkout</div>
+    <div class="label">Strategic Risk &middot; Magic Checkout</div>
     <h2>Why This Matters for Razorpay</h2>
     <div class="risk-block critical">
       <div><span class="risk-tag critical">Critical</span></div>
       <div class="risk-body">
         <strong>Upstream pre-emption of the consideration window</strong>
-        <p>GoKwik reaches D2C founders before they know they need an OTP checkout or COD tool. By the time a founder evaluates solutions, GoKwik's vocabulary is the reference frame. Magic Checkout enters the conversation downstream.</p>
+        <p>GoKwik reaches D2C founders before they know they need an OTP checkout or COD tool. By the time a founder evaluates solutions, GoKwik&#x2019;s vocabulary is the reference frame. Magic Checkout enters the conversation downstream.</p>
+      </div>
+    </div>
+    <div class="risk-block critical">
+      <div><span class="risk-tag critical">Critical</span></div>
+      <div class="risk-body">
+        <strong>End consumer brand recognition erosion</strong>
+        <p>As GoKwik grows its merchant base, consumers see its checkout across more D2C brands. Razorpay&#x2019;s checkout recognition advantage &mdash; currently significant &mdash; could erode if GoKwik&#x2019;s content engine accelerates merchant adoption without a Razorpay response.</p>
       </div>
     </div>
     <div class="risk-block high">
       <div><span class="risk-tag high">High</span></div>
       <div class="risk-body">
         <strong>Category ownership in OTP checkout and COD</strong>
-        <p>Two videos run fear-based crisis narratives — "Shopify is shutting down its COD app" and "COD is dying in India" — manufacturing urgency with GoKwik as the only resolution. These are Magic Checkout's core capabilities.</p>
+        <p>Two videos run fear-based crisis narratives &mdash; &#x201C;Shopify is shutting down its COD app&#x201D; and &#x201C;COD is dying in India&#x201D; &mdash; manufacturing urgency with GoKwik as the only resolution. These are Magic Checkout&#x2019;s core capabilities.</p>
       </div>
     </div>
     <div class="risk-block high">
       <div><span class="risk-tag high">High</span></div>
       <div class="risk-body">
         <strong>No equivalent Razorpay-owned media presence</strong>
-        <p>GoKwik has a 31.5M-view compounding content library targeting D2C founders at the problem-awareness stage. Razorpay has no identified equivalent. This is structural — not closeable with a single campaign.</p>
-      </div>
-    </div>
-    <div class="risk-block medium">
-      <div><span class="risk-tag medium">Medium</span></div>
-      <div class="risk-body">
-        <strong>Pricing perception risk in a cost-sensitive segment</strong>
-        <p>Comments surface repeated pricing objections. If GoKwik occupies the trusted educator position and Magic Checkout is perceived as premium, Razorpay risks being the expensive option in a segment where trust was built elsewhere.</p>
+        <p>GoKwik has a 31.5M-view (YouTube alone) compounding content library targeting D2C founders at the problem-awareness stage. Razorpay has no identified equivalent. This is structural &mdash; not closeable with a single campaign.</p>
       </div>
     </div>
   </div>
@@ -204,26 +216,26 @@
       <div class="option-box">
         <div class="option-n">01</div>
         <div class="option-title">Build Competing Owned Media</div>
-        <div class="option-speed">6-18 months to meaningful reach</div>
-        <div class="option-body">Develop a short-form D2C education channel using the same founder-story format. High investment, long runway — but builds a durable, compounding asset.</div>
+        <div class="option-speed">6&ndash;18 months to meaningful reach</div>
+        <div class="option-body">Develop a short-form D2C education channel using the same founder-story format. High investment, long runway &mdash; but builds a durable, compounding asset.</div>
         <div class="option-pros">+ Permanent moat, fully controlled narrative</div>
-        <div class="option-cons">- Long time-to-impact, execution risk</div>
+        <div class="option-cons">&minus; Long time-to-impact, execution risk</div>
       </div>
       <div class="option-box featured">
         <div class="option-n">02</div>
         <div class="option-title">Commission a Creator Partnership</div>
         <div class="option-speed">Weeks to launch</div>
-        <div class="option-body">Find an existing D2C education channel with comparable audience. Commission Magic Checkout integrations using GrowKwik's own playbook — narrative case studies, keyword DM funnels, UTM-tracked install links.</div>
+        <div class="option-body">Find an existing D2C education channel with comparable audience. Commission Magic Checkout integrations using GrowKwik&#x2019;s own playbook &mdash; narrative case studies, keyword DM funnels, UTM-tracked install links.</div>
         <div class="option-pros">+ Fastest response, existing audiences</div>
-        <div class="option-cons">- Creator dependency, less narrative control</div>
+        <div class="option-cons">&minus; Creator dependency, less control</div>
       </div>
       <div class="option-box">
         <div class="option-n">03</div>
         <div class="option-title">Dominate the Decision Stage</div>
         <div class="option-speed">Near-term implementable</div>
-        <div class="option-body">Cede the awareness layer. Invest in dominating evaluation and decision — superior free trial, conversion benchmarks, high-touch sales when GoKwik-aware founders start comparing tools.</div>
-        <div class="option-pros">+ High ROI if conversion data is genuinely superior</div>
-        <div class="option-cons">- Permanently cedes the education layer</div>
+        <div class="option-body">Cede the awareness layer. Invest in dominating evaluation and decision &mdash; superior free trial, conversion benchmarks, high-touch sales when GoKwik-aware founders start comparing tools.</div>
+        <div class="option-pros">+ High ROI if conversion data is superior</div>
+        <div class="option-cons">&minus; Permanently cedes the education layer</div>
       </div>
     </div>
   </div>
@@ -231,27 +243,24 @@
 </div>
 
 <footer class="site-footer">
-  <span class="footer-text">Razorpay Domestic Payments Intelligence April 2025 600 videos analyzed</span>
-  <div class="footer-links">
-    <a href="agency.html">Agency Model</a>
-    <a href="channels.html">Channels</a>
-    <a href="content.html">Content</a>
-    <a href="audience.html">Audience</a>
-    <a href="value-map.html">Value Map</a>
-    <a href="engagement.html">Engagement</a>
-  </div>
+  <span class="footer-text">Razorpay &middot; Domestic Payments Intelligence &middot; April 2025 &middot; 600 videos analyzed (YouTube) &middot; Instagram analysis pending</span>
+  <div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div>
 </footer>
 
 <script>
-const G='#c8943a',B='#5888d0',P='#e05080',V='#a070d0',K='#3a8a60',W='#b87820',M='#7a7468';
-const TC={brand_integration:V,thought_leadership:B,gokwik_feature_push:P,merchant_testimonial:K,lead_gen:G,community_building:W};
-const co={plugins:{legend:{display:false}},scales:{x:{ticks:{color:M,font:{size:10,family:'DM Mono'}},grid:{color:'#1e1e2e'}},y:{ticks:{color:M,font:{size:10,family:'DM Mono'}},grid:{color:'#1e1e2e'}}}};
-fetch('data/engagement_stats.json').then(r=>r.json()).then(eng=>{
-  const th=Object.entries(eng.by_theme||{}).sort((a,b)=>b[1].avg_views-a[1].avg_views);
-  const lbl=th.map(([k])=>k.replace(/_/g,' ')),clr=th.map(([k])=>TC[k]||M);
-  new Chart(document.getElementById('views-chart'),{type:'bar',data:{labels:lbl,datasets:[{data:th.map(([,v])=>Math.round(v.avg_views)),backgroundColor:clr,borderRadius:2}]},options:{...co,indexAxis:'y'}});
-  new Chart(document.getElementById('eng-chart'),{type:'bar',data:{labels:lbl,datasets:[{data:th.map(([,v])=>(v.avg_engagement_rate*100).toFixed(2)),backgroundColor:clr,borderRadius:2}]},options:{...co,indexAxis:'y'}});
-  document.getElementById('theme-legend').innerHTML=th.map(([k,v])=>`<div class="insight-cell"><div class="insight-dot" style="background:${TC[k]||M}"></div><div><div class="insight-name">${k.replace(/_/g,' ')}</div><div class="insight-stats">${v.post_count} posts</div></div></div>`).join('');
+document.addEventListener('DOMContentLoaded', function() {
+  const G='#c8943a',B='#5888d0',P='#e05080',V='#a070d0',K='#3a8a60',W='#b87820',M='#7a7468';
+  const TC={brand_integration:V,thought_leadership:B,gokwik_feature_push:P,merchant_testimonial:K,lead_gen:G,community_building:W};
+  const co={plugins:{legend:{display:false}},scales:{x:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}},y:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}}}};
+  fetch('data/engagement_stats.json').then(r=>r.json()).then(eng=>{
+    const th=Object.entries(eng.by_theme||{}).sort((a,b)=>b[1].avg_views-a[1].avg_views);
+    const lbl=th.map(([k])=>k.replace(/_/g,' ')),clr=th.map(([k])=>TC[k]||M);
+    if(window.Chart){
+      new Chart(document.getElementById('views-chart'),{type:'bar',data:{labels:lbl,datasets:[{data:th.map(([,v])=>Math.round(v.avg_views)),backgroundColor:clr,borderRadius:2}]},options:{...co,indexAxis:'y'}});
+      new Chart(document.getElementById('eng-chart'),{type:'bar',data:{labels:lbl,datasets:[{data:th.map(([,v])=>(v.avg_engagement_rate*100).toFixed(2)),backgroundColor:clr,borderRadius:2}]},options:{...co,indexAxis:'y'}});
+    }
+    document.getElementById('theme-legend').innerHTML=th.map(([k,v])=>'<div class="insight-cell"><div class="insight-dot" style="background:'+( TC[k]||M)+'"></div><div><div class="insight-name">'+k.replace(/_/g,' ')+'</div><div class="insight-stats">'+v.post_count+' posts &middot; '+(v.avg_views||0).toLocaleString()+' avg views &middot; '+(v.avg_engagement_rate*100).toFixed(1)+'% eng</div></div></div>').join('');
+  }).catch(()=>{});
 });
 </script>
 </body>

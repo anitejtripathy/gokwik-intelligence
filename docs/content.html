@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Content Inventory — GoKwik Intelligence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -15,6 +13,7 @@
   <a href="index.html">Brief</a>
   <a href="agency.html">Agency Model</a>
   <a href="channels.html">Channels</a>
+  <a href="razorpay-gap.html">Razorpay Gap</a>
   <a href="content.html" class="active">Content</a>
   <a href="audience.html">Audience</a>
   <a href="value-map.html">Value Map</a>
@@ -22,10 +21,10 @@
 </nav>
 
 <div class="page-hero">
-  <div class="eyebrow">Content Analysis · 600 Videos · GrowKwik + GoKwik</div>
+  <div class="eyebrow">600 Videos &middot; YouTube Only &middot; GrowKwik + GoKwik Brand</div>
   <h1>Full <em>Content Inventory</em></h1>
-  <p style="margin-top:1rem;max-width:600px;font-size:0.95rem;color:var(--muted);line-height:1.7;">
-    Every video classified by channel and content theme. Filter by channel to compare the agency content (GrowKwik) against GoKwik's own brand channel. All YouTube links open the actual video.
+  <p style="margin-top:1rem;max-width:640px;font-size:0.95rem;color:var(--muted);line-height:1.7;">
+    Every video classified by channel and theme. Filter by channel to compare the education content (GrowKwik) against GoKwik&#x2019;s brand channel. All YouTube links open the actual video.
   </p>
 </div>
 
@@ -33,18 +32,18 @@
 
   <div class="section">
     <div class="label">Theme Distribution</div>
-    <h2>What Was Published</h2>
+    <h2>Content Breakdown</h2>
     <div class="stat-grid" id="theme-stats"></div>
   </div>
 
   <div class="section">
-    <div class="label">Content Inventory</div>
-    <h2>All 600 Videos</h2>
+    <div class="label">All 600 Videos</div>
+    <h2>Content Inventory</h2>
     <div class="filter-bar">
       <select id="filter-channel">
-        <option value="">All Channels</option>
-        <option value="growkwik">GrowKwik (Agency)</option>
-        <option value="gokwik">GoKwik (Brand)</option>
+        <option value="">All Channels (600)</option>
+        <option value="growkwik">GrowKwik Education (298)</option>
+        <option value="gokwik">GoKwik Brand (302)</option>
       </select>
       <select id="filter-theme">
         <option value="">All Themes</option>
@@ -55,7 +54,7 @@
         <option value="lead_gen">Lead Gen</option>
         <option value="community_building">Community Building</option>
       </select>
-      <input type="text" id="filter-search" placeholder="Search title..." style="flex:1;min-width:160px">
+      <input type="text" id="filter-search" placeholder="Search title or description..." style="flex:1;min-width:160px">
     </div>
     <div style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.75rem" id="row-count"></div>
     <div class="table-wrap">
@@ -64,9 +63,10 @@
           <tr>
             <th>Channel</th>
             <th>Title</th>
+            <th>What It&#x2019;s About</th>
             <th>Theme</th>
             <th>Views</th>
-            <th>Engagement</th>
+            <th>Eng.</th>
             <th>Published</th>
             <th>Link</th>
           </tr>
@@ -79,105 +79,78 @@
 </div>
 
 <footer class="site-footer">
-  <span class="footer-text">Razorpay · Domestic Payments · April 2025 · 600 videos analyzed</span>
-  <div class="footer-links">
-    <a href="agency.html">Agency Model</a>
-    <a href="channels.html">Channels</a>
-    <a href="audience.html">Audience</a>
-    <a href="value-map.html">Value Map</a>
-    <a href="engagement.html">Engagement</a>
-  </div>
+  <span class="footer-text">Razorpay &middot; Domestic Payments Intelligence &middot; April 2025 &middot; 600 videos analyzed (YouTube) &middot; Instagram analysis pending</span>
+  <div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div>
 </footer>
 
 <script>
 let allItems = [];
 let themeMap = {};
-
-const TC = {
-  brand_integration: '#a070d0', thought_leadership: '#5888d0',
-  gokwik_feature_push: '#e05080', merchant_testimonial: '#3a8a60',
-  lead_gen: '#c8943a', community_building: '#b87820'
-};
+const TC = {brand_integration:'#a070d0',thought_leadership:'#5888d0',gokwik_feature_push:'#e05080',merchant_testimonial:'#3a8a60',lead_gen:'#c8943a',community_building:'#b87820'};
 
 function ytUrl(item) {
   if (item.url && item.url.startsWith('http')) return item.url;
   if (item.platform === 'youtube') return 'https://youtube.com/watch?v=' + item.id;
-  if (item.platform === 'instagram') return 'https://instagram.com/p/' + item.id + '/';
-  return '#';
+  return 'https://instagram.com/p/' + item.id + '/';
+}
+
+function brief(item) {
+  const desc = (item.text||'').replace(/<[^>]+>/g,'').trim();
+  if (desc.length > 5) return desc.substring(0,120) + (desc.length>120?'&hellip;':'');
+  return '&mdash;';
 }
 
 function renderTable(items) {
   document.getElementById('row-count').textContent = items.length + ' videos shown';
   document.getElementById('content-table').innerHTML = items.map(item => {
-    const theme = item.primary_theme || item.theme || 'unknown';
+    const theme = item.primary_theme || 'unknown';
     const url = ytUrl(item);
-    const views = item.engagement ? (item.engagement.views || 0) : 0;
-    const er = item.engagement ? (item.engagement.engagement_rate || 0) : 0;
-    const pub = (item.published_at || '').substring(0, 10) || '—';
-    const title = item.title || item.text || '—';
+    const views = item.engagement?.views || 0;
+    const er = item.engagement?.engagement_rate || 0;
+    const pub = (item.published_at||'').substring(0,7)||'&mdash;';
+    const title = (item.title||item.text||'Untitled').substring(0,55);
     return '<tr>' +
-      '<td><span class="channel-chip ' + (item.source_channel||'unknown') + '">' + (item.source_channel||'—') + '</span></td>' +
-      '<td class="td-title" title="' + title.replace(/"/g,'&quot;') + '">' + title.substring(0,60) + (title.length>60?'…':'') + '</td>' +
-      '<td><span class="theme-chip ' + theme + '">' + theme.replace(/_/g,' ') + '</span></td>' +
-      '<td class="td-muted">' + (views > 0 ? views.toLocaleString() : '—') + '</td>' +
-      '<td class="td-muted">' + (er > 0 ? (er*100).toFixed(1)+'%' : '—') + '</td>' +
-      '<td class="td-muted">' + pub + '</td>' +
-      '<td><a class="yt-link" href="' + url + '" target="_blank" rel="noopener">Watch &#x2197;</a></td>' +
+      '<td><span class="channel-chip '+(item.source_channel||'unknown')+'">'+(item.source_channel||'&mdash;')+'</span></td>' +
+      '<td class="td-title" title="'+(item.title||'').replace(/"/g,'&quot;')+'">'+title+(item.title&&item.title.length>55?'&hellip;':'')+'</td>' +
+      '<td style="max-width:200px;font-size:0.78rem;color:var(--muted);line-height:1.4">'+brief(item)+'</td>' +
+      '<td><span class="theme-chip '+theme+'">'+theme.replace(/_/g,' ')+'</span></td>' +
+      '<td class="td-muted">'+(views>0?views.toLocaleString():'&mdash;')+'</td>' +
+      '<td class="td-muted">'+(er>0?(er*100).toFixed(1)+'%':'&mdash;')+'</td>' +
+      '<td class="td-muted">'+pub+'</td>' +
+      '<td><a class="yt-link" href="'+url+'" target="_blank" rel="noopener">Watch &#x2197;</a></td>' +
       '</tr>';
   }).join('');
 }
 
 function applyFilters() {
-  const ch = document.getElementById('filter-channel').value;
-  const th = document.getElementById('filter-theme').value;
-  const q = document.getElementById('filter-search').value.toLowerCase();
-  const filtered = allItems.filter(i => {
-    if (ch && i.source_channel !== ch) return false;
-    const theme = i.primary_theme || i.theme || '';
-    if (th && theme !== th) return false;
-    if (q) {
-      const title = (i.title || i.text || '').toLowerCase();
-      if (!title.includes(q)) return false;
+  const ch=document.getElementById('filter-channel').value;
+  const th=document.getElementById('filter-theme').value;
+  const q=document.getElementById('filter-search').value.toLowerCase();
+  renderTable(allItems.filter(i=>{
+    if(ch && i.source_channel!==ch) return false;
+    if(th && (i.primary_theme||'unknown')!==th) return false;
+    if(q) {
+      const t=((i.title||'')+(i.text||'')).toLowerCase();
+      if(!t.includes(q)) return false;
     }
     return true;
-  });
-  renderTable(filtered);
+  }));
 }
 
 Promise.all([
-  fetch('data/content_items.json').then(r => r.json()),
-  fetch('data/content_themes.json').then(r => r.json())
+  fetch('data/content_items.json').then(r=>r.json()),
+  fetch('data/content_themes.json').then(r=>r.json())
 ]).then(([items, themes]) => {
-  // Build theme lookup from content_themes
-  (themes.items || []).forEach(ti => {
-    themeMap[ti.id] = ti.primary_theme;
-  });
-  
-  // Merge: attach theme classification to content items
-  allItems = items.map(item => ({
-    ...item,
-    primary_theme: themeMap[item.id] || 'unknown'
-  }));
-  
-  // Theme frequency stats
-  const freq = {};
-  allItems.forEach(i => {
-    const t = i.primary_theme || 'unknown';
-    freq[t] = (freq[t] || 0) + 1;
-  });
-  const sorted = Object.entries(freq).sort((a,b) => b[1]-a[1]);
-  document.getElementById('theme-stats').innerHTML = sorted.map(([k,v]) =>
-    '<div class="stat-cell"><span class="stat-num" style="font-size:2rem;color:' + (TC[k]||'#7a7468') + '">' + v + '</span>' +
-    '<span class="stat-name">' + k.replace(/_/g,' ') + '</span></div>'
-  ).join('');
-  
+  (themes.items||[]).forEach(t=>themeMap[t.id]=t.primary_theme);
+  allItems = items.map(i=>{...i, primary_theme:themeMap[i.id]||'unknown'});
+  const freq={};
+  allItems.forEach(i=>{ const t=i.primary_theme; freq[t]=(freq[t]||0)+1; });
+  const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]);
+  document.getElementById('theme-stats').innerHTML=sorted.map(([k,v])=>'<div class="stat-cell"><span class="stat-num" style="font-size:2rem;color:'+(TC[k]||'#7a7468')+'">'+v+'</span><span class="stat-name">'+k.replace(/_/g,' ')+'</span></div>').join('');
   renderTable(allItems);
-  
-  ['filter-channel', 'filter-theme'].forEach(id =>
-    document.getElementById(id).addEventListener('change', applyFilters)
-  );
-  document.getElementById('filter-search').addEventListener('input', applyFilters);
-});
+  ['filter-channel','filter-theme'].forEach(id=>document.getElementById(id).addEventListener('change',applyFilters));
+  document.getElementById('filter-search').addEventListener('input',applyFilters);
+}).catch(e=>console.error(e));
 </script>
 </body>
 </html>

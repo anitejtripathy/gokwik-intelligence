@@ -253,3 +253,37 @@ tr:hover td { background: var(--surface); }
 .confidence-medium { color: var(--warn); font-weight: 600; }
 .confidence-low { color: var(--muted); font-weight: 600; }
 .intent-chip { display: inline-block; background: rgba(200,148,58,0.1); color: var(--gold-lt); border: 1px solid rgba(200,148,58,0.3); border-radius: 4px; padding: 2px 8px; font-size: 0.72rem; }
+
+/* ─── MOBILE RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 0 1rem; gap: 0; overflow-x: auto; }
+  nav a { padding: 0 0.6rem; font-size: 0.55rem; white-space: nowrap; }
+  .nav-brand { flex-shrink: 0; font-size: 0.85rem; margin-right: 0.5rem; }
+  .container, .container-wide, .container-narrow { padding: 1.5rem 1rem; }
+  .page-hero { padding: 2rem 1rem 1.5rem; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.25rem; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .playbook { grid-template-columns: 1fr 1fr; }
+  .chart-grid { grid-template-columns: 1fr; }
+  .options-row { grid-template-columns: 1fr; }
+  .channel-split { grid-template-columns: 1fr; }
+  .bm-grid { grid-template-columns: 1fr; }
+  .insight-row { grid-template-columns: 1fr 1fr; }
+  .risk-block { grid-template-columns: 60px 1fr; gap: 0.75rem; padding: 1rem; }
+  .story-block { grid-template-columns: 50px 1fr; gap: 1rem; }
+  .story-num { font-size: 2.5rem; }
+  .table-wrap { font-size: 0.75rem; }
+  th, td { padding: 0.5rem 0.6rem; }
+  .site-footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 1.5rem 1rem; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  .divider { margin: 1.5rem 0; }
+  .section { margin-bottom: 2.5rem; }
+}
+
+@media (max-width: 480px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .playbook { grid-template-columns: 1fr; }
+  nav a { font-size: 0.5rem; padding: 0 0.4rem; }
+  h1 { font-size: 1.6rem; }
+}

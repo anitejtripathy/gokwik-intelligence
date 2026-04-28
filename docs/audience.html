@@ -2,62 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Audience Intelligence — GoKwik Intelligence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <nav>
-  <a class="brand" href="index.html">GoKwik Intelligence</a>
-  <a href="index.html">Overview</a>
+  <a class="nav-brand" href="index.html">GoKwik Intelligence</a>
+  <a href="index.html">Brief</a>
   <a href="agency.html">Agency Model</a>
   <a href="channels.html">Channels</a>
+  <a href="razorpay-gap.html">Razorpay Gap</a>
   <a href="content.html">Content</a>
   <a href="audience.html" class="active">Audience</a>
   <a href="value-map.html">Value Map</a>
   <a href="engagement.html">Engagement</a>
 </nav>
-<div class="container">
-  <h1>D2C Audience Intelligence</h1>
-  <div class="stat-grid" id="audience-stats"></div>
-  <h2>Top D2C Engagers</h2>
-  <div class="table-wrapper">
-    <table>
-      <thead><tr><th>Username</th><th>Platform</th><th>Bio</th><th>Comment</th><th>Intent Signal</th></tr></thead>
-      <tbody id="engagers-table"></tbody>
-    </table>
-  </div>
-  <h2>High-Intent Comments</h2>
-  <div id="intent-comments"></div>
+
+<div class="page-hero">
+  <div class="eyebrow">Audience Intelligence &middot; YouTube Comments Only</div>
+  <h1><em>Who</em> Is Watching<br>and Engaging</h1>
+  <p style="margin-top:1rem;max-width:640px;font-size:0.95rem;color:var(--muted);line-height:1.7;">
+    High-intent comments captured from the GoKwik integration videos. These are people who actively engaged with the content &mdash; the most direct signal of merchant audience quality. Filter by signal type to explore.
+  </p>
 </div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="label">Commenter Stats</div>
+    <h2>Unique Engagement</h2>
+    <div class="stat-grid" id="audience-stats"></div>
+  </div>
+
+  <div class="section">
+    <div class="label">High-Intent Comments</div>
+    <h2>What the Audience Is Saying</h2>
+    <p style="max-width:680px;margin-bottom:1.5rem;">These comments were captured from GoKwik integration videos and classified by intent signal type. Each commenter has self-identified as a D2C operator with a specific need.</p>
+    <div class="filter-bar">
+      <select id="filter-signal">
+        <option value="">All Signal Types</option>
+        <option value="app_install_intent">App Install Intent</option>
+        <option value="product_interest">Product Interest</option>
+        <option value="product_switching_intent">Product Switching Intent</option>
+        <option value="contact_request">Contact / Referral Request</option>
+        <option value="pricing_sensitivity">Pricing Sensitivity</option>
+      </select>
+    </div>
+    <div style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.75rem" id="signal-count"></div>
+    <div id="intent-comments"></div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span class="footer-text">Razorpay &middot; Domestic Payments Intelligence &middot; April 2025 &middot; 600 videos analyzed (YouTube) &middot; Instagram analysis pending</span>
+  <div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div>
+</footer>
+
 <script>
-fetch('data/audience_profile.json').then(r => r.json()).then(data => {
-  document.getElementById('audience-stats').innerHTML = `
-    <div class="stat-card"><div class="value">${data.total_unique_commenters||0}</div><div class="label">Unique Commenters</div></div>
-    <div class="stat-card"><div class="value">${data.d2c_brand_count||0}</div><div class="label">D2C Brands</div></div>
-    <div class="stat-card"><div class="value">${data.merchant_individual_count||0}</div><div class="label">Merchant Individuals</div></div>
-    <div class="stat-card"><div class="value">${data.consumer_count||0}</div><div class="label">Consumers</div></div>
-    <div class="stat-card"><div class="value">${(data.intent_signal_comments||[]).length}</div><div class="label">Intent Signals</div></div>
-  `;
-  document.getElementById('engagers-table').innerHTML = (data.top_d2c_engagers||[]).map(e => `
-    <tr>
-      <td><strong>@${e.username}</strong></td>
-      <td><span class="badge badge-blue">${e.platform}</span></td>
-      <td style="font-size:0.8rem;color:var(--muted);max-width:200px">${e.bio||'—'}</td>
-      <td style="font-size:0.8rem;max-width:250px">${e.comment||'—'}</td>
-      <td>${e.intent_signal ? `<span class="intent-chip">${e.intent_signal}</span>` : '—'}</td>
-    </tr>`).join('');
-  document.getElementById('intent-comments').innerHTML = (data.intent_signal_comments||[]).map(c => `
-    <div class="card" style="margin-bottom:0.5rem">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
-        <strong>@${c.username}</strong>
-        <span class="intent-chip">${c.signal_type}</span>
-      </div>
-      <p style="margin:0">"${c.comment}"</p>
-    </div>`).join('');
-});
+fetch('data/audience_profile.json').then(r=>r.json()).then(data=>{
+  document.getElementById('audience-stats').innerHTML = [
+    {n:data.total_unique_commenters||0,l:'Unique Commenters',s:'across all analyzed videos'},
+    {n:(data.intent_signal_comments||[]).length,l:'High-Intent Comments',s:'self-qualified D2C operators'},
+    {n:data.d2c_brand_count||0,l:'D2C Brands Identified',s:'from commenter profiles'},
+  ].map(s=>'<div class="stat-cell">'+(s===Object([{n:data.total_unique_commenters||0,l:'Unique Commenters',s:'across all analyzed videos'}])[0]?'gold':'')+'><span class="stat-num">'+s.n+'</span><span class="stat-name">'+s.l+'</span><span class="stat-sub">'+s.s+'</span></div>').join('');
+
+  const allSignals = data.intent_signal_comments||[];
+
+  function render(items) {
+    document.getElementById('signal-count').textContent = items.length + ' comments shown';
+    document.getElementById('intent-comments').innerHTML = items.map(c=>{
+      const sig = c.signal_type||'unknown';
+      return '<div class="card" style="margin-bottom:0.5rem;display:flex;gap:1rem;align-items:flex-start">' +
+        '<div style="flex-shrink:0"><span class="intent-chip">'+sig.replace(/_/g,' ')+'</span></div>' +
+        '<div>' +
+          '<div style="font-size:0.8rem;font-weight:600;color:var(--text);margin-bottom:0.25rem">@'+c.username+'</div>' +
+          '<div style="font-size:0.85rem;color:var(--muted);line-height:1.6">"'+c.comment+'"</div>' +
+        '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  render(allSignals);
+
+  // Populate signal filter options dynamically
+  const signalTypes = [...new Set(allSignals.map(c=>c.signal_type).filter(Boolean))];
+  const sel = document.getElementById('filter-signal');
+  // Clear and rebuild options
+  sel.innerHTML = '<option value="">All Signal Types ('+allSignals.length+')</option>';
+  signalTypes.forEach(s=>{
+    const count = allSignals.filter(c=>c.signal_type===s).length;
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = s.replace(/_/g,' ')+' ('+count+')';
+    sel.appendChild(opt);
+  });
+
+  sel.addEventListener('change',()=>{
+    const val = sel.value;
+    render(val ? allSignals.filter(c=>c.signal_type===val) : allSignals);
+  });
+}).catch(e=>console.error(e));
 </script>
 </body>
 </html>

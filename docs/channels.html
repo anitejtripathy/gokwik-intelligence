@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Channel Analysis — GoKwik Intelligence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="assets/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4" defer></script>
 </head>
 <body>
 <nav>
@@ -16,6 +14,7 @@
   <a href="index.html">Brief</a>
   <a href="agency.html">Agency Model</a>
   <a href="channels.html" class="active">Channels</a>
+  <a href="razorpay-gap.html">Razorpay Gap</a>
   <a href="content.html">Content</a>
   <a href="audience.html">Audience</a>
   <a href="value-map.html">Value Map</a>
@@ -23,102 +22,109 @@
 </nav>
 
 <div class="page-hero">
-  <div class="eyebrow">Two Channels · One Strategy · April 2025</div>
-  <h1>GoKwik Brand vs<br><em>GrowKwik Agency</em></h1>
+  <div class="eyebrow">Two YouTube Channels &middot; One Instagram &middot; One Strategy</div>
+  <h1>GoKwik Brand vs <em>GrowKwik Education</em><br>vs Instagram</h1>
   <p style="margin-top:1rem;max-width:640px;font-size:0.95rem;color:var(--muted);line-height:1.7;">
-    Two distinct YouTube channels operating as a two-layer funnel. GrowKwik (the agency channel) builds category awareness and intercepts founders upstream. GoKwik's own brand channel provides institutional credibility. Together they cover the full consideration journey.
+    GoKwik runs a deliberate three-channel architecture: an education channel (GrowKwik) for top-of-funnel awareness, a brand channel for institutional credibility, and an Instagram presence for reach. This analysis covers YouTube only &mdash; 600 videos. Instagram is a parallel effort, not yet analyzed.
   </p>
 </div>
 
 <div class="container">
 
   <div class="section">
-    <div class="label">Two-Channel Architecture</div>
-    <h2>How the Two Channels Work Together</h2>
+    <div class="label">Three-Channel Architecture</div>
+    <h2>How the Channels Divide Labour</h2>
     <div class="channel-split">
       <div class="channel-panel growkwik">
         <div class="channel-name">GrowKwik</div>
-        <div class="channel-sub">Agency Channel · Varun Maya · UCUtC6skAy8znroMyzJDIdEw</div>
+        <div class="channel-sub">Education Channel &middot; Led by Vargab Bakshi (CGO) &middot; UCUtC6skAy8znroMyzJDIdEw</div>
         <div class="channel-stat"><span class="key">Role</span><span class="val">Top-of-funnel awareness &amp; lead gen</span></div>
-        <div class="channel-stat"><span class="key">Videos</span><span class="val">298</span></div>
-        <div class="channel-stat"><span class="key">Positioning</span><span class="val">"India's #1 D2C channel" — independent editorial</span></div>
-        <div class="channel-stat"><span class="key">GoKwik disclosure</span><span class="val">Never — embedded as organic discovery</span></div>
-        <div class="channel-stat"><span class="key">Content type</span><span class="val">Founder stories, D2C insights, marketing breakdowns</span></div>
+        <div class="channel-stat"><span class="key">Videos analyzed</span><span class="val">298</span></div>
+        <div class="channel-stat"><span class="key">Positioning</span><span class="val">&#x201C;India&#x2019;s #1 D2C channel&#x201D; &mdash; independent editorial voice</span></div>
+        <div class="channel-stat"><span class="key">GoKwik disclosure</span><span class="val">Never &mdash; embedded as organic discovery</span></div>
         <div class="channel-stat"><span class="key">GoKwik integration</span><span class="val">97 of 298 videos contain a GoKwik feature push</span></div>
-        <div class="channel-stat"><span class="key">Lead mechanism</span><span class="val">Keyword comment → DM with UTM-tracked App Store link</span></div>
-        <div class="channel-stat"><span class="key">Audience trust level</span><span class="val">High — perceived as independent creator, not brand</span></div>
+        <div class="channel-stat"><span class="key">Lead mechanism</span><span class="val">Keyword comment &rarr; DM with UTM-tracked App Store link</span></div>
+        <div class="channel-stat"><span class="key">Audience trust</span><span class="val">High &mdash; perceived as independent creator, not brand</span></div>
+        <div class="channel-stat"><span class="key">Followers</span><span class="val">500K+ cumulative (YouTube + Instagram)</span></div>
       </div>
       <div class="channel-panel gokwik">
         <div class="channel-name">GoKwik</div>
-        <div class="channel-sub">Brand Channel · UCkRVB_dgAXVoDsUcq1Q98tw</div>
+        <div class="channel-sub">Brand Channel &middot; UCkRVB_dgAXVoDsUcq1Q98tw</div>
         <div class="channel-stat"><span class="key">Role</span><span class="val">Institutional credibility &amp; direct merchant education</span></div>
-        <div class="channel-stat"><span class="key">Videos</span><span class="val">302</span></div>
-        <div class="channel-stat"><span class="key">Positioning</span><span class="val">Official brand voice — product walkthroughs, case studies</span></div>
-        <div class="channel-stat"><span class="key">GoKwik disclosure</span><span class="val">Explicit — this is GoKwik's own channel</span></div>
-        <div class="channel-stat"><span class="key">Content type</span><span class="val">Product demos, merchant success stories, industry data</span></div>
+        <div class="channel-stat"><span class="key">Videos analyzed</span><span class="val">302</span></div>
+        <div class="channel-stat"><span class="key">Positioning</span><span class="val">Official brand voice &mdash; product demos, case studies</span></div>
+        <div class="channel-stat"><span class="key">GoKwik disclosure</span><span class="val">Explicit &mdash; this is GoKwik&#x2019;s own channel</span></div>
         <div class="channel-stat"><span class="key">GoKwik integration</span><span class="val">All 302 videos are direct GoKwik content</span></div>
         <div class="channel-stat"><span class="key">Lead mechanism</span><span class="val">Direct CTAs, demo requests, merchant contact forms</span></div>
-        <div class="channel-stat"><span class="key">Audience trust level</span><span class="val">Medium — known brand channel, appropriate scepticism</span></div>
+        <div class="channel-stat"><span class="key">Audience trust</span><span class="val">Medium &mdash; known brand channel, appropriate scepticism</span></div>
+        <div class="channel-stat"><span class="key">Merchant network</span><span class="val">130M shoppers &middot; 12,000+ brands (Lenskart, Neeman&#x2019;s, Shoppers Stop)</span></div>
       </div>
+    </div>
+    <div class="card" style="border-color:rgba(88,136,208,0.3);background:rgba(88,136,208,0.04);margin-top:1px">
+      <div style="font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:#5888d0;margin-bottom:0.5rem">Instagram &middot; Not Yet Analyzed</div>
+      <p style="font-size:0.9rem;color:var(--muted);margin:0;line-height:1.75;">GoKwik runs the same content playbook on Instagram &mdash; Reels, Stories, and comment-to-DM funnels. This analysis covers YouTube only (free API). Instagram data collection requires a separate approach and is a logical next step for this investigation.</p>
     </div>
   </div>
 
   <div class="section">
     <div class="label">The Two-Layer Funnel</div>
-    <h2>How They Work Together</h2>
+    <h2>How GrowKwik and GoKwik Work Together</h2>
     <div class="playbook">
       <div class="play-step">
-        <span class="play-n" style="color:var(--gold)">Layer 01 · GrowKwik</span>
+        <span class="play-n" style="color:var(--gold)">GrowKwik</span>
         <span class="play-icon">&#x1F3A5;</span>
         <div class="play-title">Problem Awareness</div>
-        <div class="play-body">Founder watches a GrowKwik video about a D2C brand's checkout problem. GoKwik is mentioned as the solution. No ad disclosure. Trust is high.</div>
+        <div class="play-body">Founder watches a GrowKwik video about a D2C brand&#x2019;s checkout problem. GoKwik is mentioned as the solution the protagonist &#x201C;discovered.&#x201D; No ad disclosure. Trust is high.</div>
       </div>
       <div class="play-step">
-        <span class="play-n" style="color:var(--gold)">Layer 01 · GrowKwik</span>
+        <span class="play-n" style="color:var(--gold)">GrowKwik</span>
         <span class="play-icon">&#x1F4AC;</span>
         <div class="play-title">Intent Signal Captured</div>
-        <div class="play-body">Founder comments "COD" or "checkout" → receives Shopify App Store DM with UTM tracking. Self-qualified warm lead enters GoKwik's CRM.</div>
+        <div class="play-body">Founder comments &#x201C;COD&#x201D; &rarr; receives Shopify App Store DM with UTM tracking. Self-qualified warm lead enters GoKwik&#x2019;s pipeline.</div>
       </div>
       <div class="play-step">
-        <span class="play-n" style="color:#5888d0">Layer 02 · GoKwik</span>
+        <span class="play-n" style="color:#5888d0">GoKwik Brand</span>
         <span class="play-icon">&#x1F4CB;</span>
         <div class="play-title">Credibility Validation</div>
-        <div class="play-body">Founder now searches "GoKwik" to validate. Finds 302 brand channel videos: product demos, case studies, industry data. Institutional trust reinforced.</div>
+        <div class="play-body">Founder searches &#x201C;GoKwik&#x201D; to validate. Finds 302 brand channel videos: demos, case studies, industry data. Institutional trust reinforced.</div>
       </div>
       <div class="play-step">
-        <span class="play-n" style="color:#5888d0">Layer 02 · GoKwik</span>
+        <span class="play-n" style="color:#5888d0">GoKwik Brand</span>
         <span class="play-icon">&#x1F91D;</span>
         <div class="play-title">Decision &amp; Conversion</div>
-        <div class="play-body">Founder installs from App Store or requests a demo. By this point, GoKwik is the assumed solution — evaluation of alternatives happens on GoKwik's terms.</div>
+        <div class="play-body">Founder installs or requests a demo. By this point, GoKwik is the assumed solution &mdash; evaluation of alternatives happens on GoKwik&#x2019;s terms.</div>
       </div>
     </div>
     <div class="callout">
-      <strong>The combined effect:</strong> GrowKwik generates the demand. GoKwik's brand channel closes it. The separation is deliberate — a founder who arrives at GoKwik's brand channel already primed from GrowKwik content is far more likely to convert than a cold organic searcher.
+      <strong>The architecture:</strong> GrowKwik generates demand. GoKwik brand channel closes it. A founder who arrives primed from GrowKwik content converts at a far higher rate than a cold organic searcher &mdash; and arrives already sold on GoKwik&#x2019;s framing of the problem.
     </div>
   </div>
 
   <div class="section">
-    <div class="label">Performance Comparison</div>
-    <h2>Channel-by-Channel Metrics</h2>
+    <div class="label">Performance by Channel</div>
+    <h2>Metrics Breakdown</h2>
     <div class="chart-grid">
       <div class="chart-box">
-        <h3>Videos by Theme — GrowKwik Agency</h3>
+        <h3>Theme Distribution &mdash; GrowKwik</h3>
         <canvas id="growkwik-chart" height="130"></canvas>
       </div>
       <div class="chart-box">
-        <h3>Videos by Theme — GoKwik Brand</h3>
+        <h3>Theme Distribution &mdash; GoKwik Brand</h3>
         <canvas id="gokwik-chart" height="130"></canvas>
       </div>
     </div>
-    <div id="channel-stats" class="stat-grid" style="margin-top:1rem"></div>
+    <div class="stat-grid" id="channel-stats" style="margin-top:1rem"></div>
   </div>
 
   <div class="section">
     <div class="label">Strategic Implication</div>
-    <h2>What This Architecture Means</h2>
+    <h2>Why This Architecture Is Hard to Counter</h2>
     <div class="card card-gold">
       <p style="font-size:0.95rem;color:var(--text);line-height:1.85;">
-        A single brand YouTube channel is easy to discount — audiences know it's promotional. <strong>The two-channel architecture is specifically designed to defeat this scepticism.</strong> GrowKwik earns trust as an independent voice, then embeds GoKwik. GoKwik's brand channel then provides the institutional proof. A founder who discovers GoKwik through GrowKwik believes they found it themselves — the highest trust state possible. Razorpay has no equivalent architecture targeting D2C founders at the awareness layer.
+        A single brand YouTube channel is easy to discount &mdash; audiences know it&#x2019;s promotional. <strong>The two-channel architecture defeats this scepticism by design.</strong> GrowKwik earns trust as an independent voice, then embeds GoKwik. The brand channel then provides institutional proof. A founder who discovers GoKwik through GrowKwik believes they found it themselves &mdash; the highest trust state possible before a sales conversation begins.
+      </p>
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.75;margin-top:0.75rem;">
+        Add Instagram to this and the reach effectively doubles. Razorpay has no equivalent architecture targeting D2C founders at the problem-awareness stage on either platform.
       </p>
     </div>
   </div>
@@ -126,58 +132,49 @@
 </div>
 
 <footer class="site-footer">
-  <span class="footer-text">Razorpay Domestic Payments Intelligence April 2025</span>
-  <div class="footer-links">
-    <a href="agency.html">Agency Model</a>
-    <a href="content.html">Content</a>
-    <a href="audience.html">Audience</a>
-    <a href="engagement.html">Engagement</a>
-  </div>
+  <span class="footer-text">Razorpay &middot; Domestic Payments Intelligence &middot; April 2025 &middot; 600 videos analyzed (YouTube) &middot; Instagram analysis pending</span>
+  <div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div>
 </footer>
 
 <script>
-const G='#c8943a',B='#5888d0',P='#e05080',V='#a070d0',K='#3a8a60',W='#b87820',M='#7a7468';
-const TC={brand_integration:V,thought_leadership:B,gokwik_feature_push:P,merchant_testimonial:K,lead_gen:G,community_building:W};
-const co={plugins:{legend:{display:false}},scales:{x:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}},y:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}}}};
+document.addEventListener('DOMContentLoaded', function() {
+  const G='#c8943a',B='#5888d0',P='#e05080',V='#a070d0',K='#3a8a60',W='#b87820',M='#7a7468';
+  const TC={brand_integration:V,thought_leadership:B,gokwik_feature_push:P,merchant_testimonial:K,lead_gen:G,community_building:W};
+  const co={plugins:{legend:{display:false}},scales:{x:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}},y:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}}}};
 
-Promise.all([
-  fetch('data/content_items.json').then(r=>r.json()),
-  fetch('data/content_themes.json').then(r=>r.json()),
-  fetch('data/engagement_stats.json').then(r=>r.json())
-]).then(([items, themes, eng]) => {
-  const tmap = {};
-  (themes.items||[]).forEach(t => tmap[t.id] = t.primary_theme);
-  
-  const gw = items.filter(i=>i.source_channel==='growkwik');
-  const gk = items.filter(i=>i.source_channel==='gokwik');
-  
-  function themeFreq(arr) {
-    const f={};
-    arr.forEach(i=>{ const t=tmap[i.id]||'unknown'; f[t]=(f[t]||0)+1; });
-    return Object.entries(f).sort((a,b)=>b[1]-a[1]);
-  }
-  
-  function makeChart(id, data) {
-    const lbl=data.map(([k])=>k.replace(/_/g,' ')), clr=data.map(([k])=>TC[k]||M);
-    new Chart(document.getElementById(id),{type:'bar',data:{labels:lbl,datasets:[{data:data.map(([,v])=>v),backgroundColor:clr,borderRadius:2}]},options:{...co,indexAxis:'y'}});
-  }
-  makeChart('growkwik-chart', themeFreq(gw));
-  makeChart('gokwik-chart', themeFreq(gk));
-  
-  function avg(arr, fn) { return arr.length ? arr.reduce((s,i)=>s+fn(i),0)/arr.length : 0; }
-  const gwViews = avg(gw, i=>i.engagement?.views||0);
-  const gkViews = avg(gk, i=>i.engagement?.views||0);
-  const gwEr = avg(gw, i=>i.engagement?.engagement_rate||0);
-  const gkEr = avg(gk, i=>i.engagement?.engagement_rate||0);
-  
-  document.getElementById('channel-stats').innerHTML = [
-    {label:'GrowKwik Videos',val:gw.length,sub:'Agency channel'},
-    {label:'GoKwik Videos',val:gk.length,sub:'Brand channel'},
-    {label:'GrowKwik Avg Views',val:Math.round(gwViews).toLocaleString(),sub:'per video'},
-    {label:'GoKwik Avg Views',val:Math.round(gkViews).toLocaleString(),sub:'per video'},
-    {label:'GrowKwik Avg Engagement',val:(gwEr*100).toFixed(1)+'%',sub:'engagement rate'},
-    {label:'GoKwik Avg Engagement',val:(gkEr*100).toFixed(1)+'%',sub:'engagement rate'},
-  ].map(s=>`<div class="stat-cell"><span class="stat-num" style="font-size:1.75rem">${s.val}</span><span class="stat-name">${s.label}</span><span class="stat-sub">${s.sub}</span></div>`).join('');
+  Promise.all([
+    fetch('data/content_items.json').then(r=>r.json()),
+    fetch('data/content_themes.json').then(r=>r.json())
+  ]).then(([items, themes]) => {
+    const tmap={};
+    (themes.items||[]).forEach(t => tmap[t.id]=t.primary_theme);
+    const gw=items.filter(i=>i.source_channel==='growkwik');
+    const gk=items.filter(i=>i.source_channel==='gokwik');
+
+    function freq(arr) {
+      const f={};
+      arr.forEach(i=>{ const t=tmap[i.id]||'unknown'; f[t]=(f[t]||0)+1; });
+      return Object.entries(f).sort((a,b)=>b[1]-a[1]);
+    }
+
+    function mkChart(id, data) {
+      if(!window.Chart) return;
+      new Chart(document.getElementById(id),{type:'bar',data:{labels:data.map(([k])=>k.replace(/_/g,' ')),datasets:[{data:data.map(([,v])=>v),backgroundColor:data.map(([k])=>TC[k]||M),borderRadius:2}]},options:{...co,indexAxis:'y'}});
+    }
+    mkChart('growkwik-chart', freq(gw));
+    mkChart('gokwik-chart', freq(gk));
+
+    function avg(arr,fn){ return arr.length?arr.reduce((s,i)=>s+fn(i),0)/arr.length:0; }
+    const stats=[
+      {l:'GrowKwik Videos',v:gw.length,s:'Education channel'},
+      {l:'GoKwik Videos',v:gk.length,s:'Brand channel'},
+      {l:'GrowKwik Avg Views',v:Math.round(avg(gw,i=>i.engagement?.views||0)).toLocaleString(),s:'per video'},
+      {l:'GoKwik Avg Views',v:Math.round(avg(gk,i=>i.engagement?.views||0)).toLocaleString(),s:'per video'},
+      {l:'GrowKwik Engagement',v:(avg(gw,i=>i.engagement?.engagement_rate||0)*100).toFixed(1)+'%',s:'avg rate'},
+      {l:'GoKwik Engagement',v:(avg(gk,i=>i.engagement?.engagement_rate||0)*100).toFixed(1)+'%',s:'avg rate'},
+    ];
+    document.getElementById('channel-stats').innerHTML=stats.map(s=>'<div class="stat-cell"><span class="stat-num" style="font-size:1.75rem">'+s.v+'</span><span class="stat-name">'+s.l+'</span><span class="stat-sub">'+s.s+'</span></div>').join('');
+  }).catch(()=>{});
 });
 </script>
 </body>
