@@ -2,7 +2,7 @@ import json
 import os
 import re
 from pathlib import Path
-import anthropic
+from anthropic import AnthropicVertex
 
 
 class BaseAgent:
@@ -10,7 +10,10 @@ class BaseAgent:
 
     def __init__(self, prompts_dir: str = "prompts"):
         self.prompts_dir = Path(prompts_dir)
-        self.client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+        self.client = AnthropicVertex(
+            project_id=os.environ["ANTHROPIC_VERTEX_PROJECT_ID"],
+            region=os.environ.get("CLOUD_ML_REGION", "us-east5"),
+        )
 
     def load_prompt(self, name: str) -> str:
         path = self.prompts_dir / f"{name}.md"

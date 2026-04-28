@@ -1,0 +1,138 @@
+{
+  "total_post_count": 600,
+  "total_estimated_reach": 31503243,
+  "by_platform": {
+    "youtube": {
+      "post_count": 600,
+      "avg_views": 52505.405,
+      "avg_likes": 1346.825,
+      "avg_comments": 15.2333,
+      "avg_engagement_rate": 0.0197,
+      "total_views": 31503243
+    }
+  },
+  "by_theme": {
+    "brand_integration": {
+      "avg_views": 114718.087,
+      "avg_engagement_rate": 0.0258,
+      "post_count": 46
+    },
+    "thought_leadership": {
+      "avg_views": 56663.7905,
+      "avg_engagement_rate": 0.0207,
+      "post_count": 420
+    },
+    "community_building": {
+      "avg_views": 19829.0667,
+      "avg_engagement_rate": 0.0219,
+      "post_count": 15
+    },
+    "gokwik_feature_push": {
+      "avg_views": 20974.0978,
+      "avg_engagement_rate": 0.0114,
+      "post_count": 92
+    },
+    "lead_gen": {
+      "avg_views": 7475.75,
+      "avg_engagement_rate": 0.0037,
+      "post_count": 16
+    },
+    "merchant_testimonial": {
+      "avg_views": 7341.2727,
+      "avg_engagement_rate": 0.0422,
+      "post_count": 11
+    }
+  },
+  "top_10_posts": [
+    {
+      "id": "M3st6cKGqAY",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=M3st6cKGqAY",
+      "theme": "gokwik_feature_push",
+      "engagement_rate": 0.1,
+      "views": 20,
+      "published_at": "2023-03-22T06:10:42Z"
+    },
+    {
+      "id": "r8le9gJKhw8",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=r8le9gJKhw8",
+      "theme": "thought_leadership",
+      "engagement_rate": 0.0961,
+      "views": 1738,
+      "published_at": "2025-01-02T17:57:03Z"
+    },
+    {
+      "id": "R0VVwcPCHS8",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=R0VVwcPCHS8",
+      "theme": "thought_leadership",
+      "engagement_rate": 0.0938,
+      "views": 15936,
+      "published_at": "2025-11-28T23:30:08Z"
+    },
+    {
+      "id": "Ogc8MZlJttM",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=Ogc8MZlJttM",
+      "theme": "thought_leadership",
+      "engagement_rate": 0.0871,
+      "views": 9372,
+      "published_at": "2024-08-18T15:51:30Z"
+    },
+    {
+      "id": "FW_1pTXkUm8",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=FW_1pTXkUm8",
+      "theme": "community_building",
+      "engagement_rate": 0.0839,
+      "views": 16421,
+      "published_at": "2025-10-24T10:30:19Z"
+    },
+    {
+      "id": "yGXgjkzCelc",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=yGXgjkzCelc",
+      "theme": "merchant_testimonial",
+      "engagement_rate": 0.0782,
+      "views": 12665,
+      "published_at": "2024-12-07T16:42:56Z"
+    },
+    {
+      "id": "Irm58bEqjPY",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=Irm58bEqjPY",
+      "theme": "merchant_testimonial",
+      "engagement_rate": 0.0768,
+      "views": 9438,
+      "published_at": "2024-12-18T18:01:50Z"
+    },
+    {
+      "id": "Irm58bEqjPY",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=Irm58bEqjPY",
+      "theme": "merchant_testimonial",
+      "engagement_rate": 0.0768,
+      "views": 9438,
+      "published_at": "2024-12-18T18:01:50Z"
+    },
+    {
+      "id": "ccanrmw9Vl0",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=ccanrmw9Vl0",
+      "theme": "thought_leadership",
+      "engagement_rate": 0.0714,
+      "views": 2380,
+      "published_at": "2024-12-25T18:03:48Z"
+    },
+    {
+      "id": "HQzU9T2iq-A",
+      "platform": "youtube",
+      "url": "https://youtube.com/watch?v=HQzU9T2iq-A",
+      "theme": "thought_leadership",
+      "engagement_rate": 0.0705,
+      "views": 9774,
+      "published_at": "2024-09-12T12:20:05Z"
+    }
+  ]
+}

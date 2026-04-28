@@ -8,9 +8,13 @@ Usage:
 Reads from .env:
   YOUTUBE_API_KEY, ANTHROPIC_API_KEY,
   GROWKWIK_YOUTUBE_CHANNEL_ID, GROWKWIK_INSTAGRAM_USERNAME, VARUN_MAYA_VIDEO_ID
+Usage:
+  python run.py              # full pipeline
+  python run.py --analyze    # skip collection, run Stage 2+3 on existing raw data
 """
 import json
 import os
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from dotenv import load_dotenv
@@ -20,6 +24,7 @@ load_dotenv()
 from collectors.youtube_collector import YouTubeCollector
 from collectors.instagram_collector import InstagramCollector
 from collectors.normalizer import save_normalized, load_normalized
+from collectors.schema import normalize_youtube_video
 from agents.agency_model_agent import AgencyModelAgent
 from agents.content_theme_agent import ContentThemeAgent
 from agents.audience_intelligence_agent import AudienceIntelligenceAgent
@@ -49,8 +54,13 @@ def stage1_collect():
         output_dir="data/raw/instagram"
     )
 
-    print("[Stage 1] Collecting YouTube...")
-    yt_items = yt_collector.collect_all(os.environ["GROWKWIK_YOUTUBE_CHANNEL_ID"])
+    print("[Stage 1] Collecting GrowKwik YouTube (Varun Maya agency)...")
+    growkwik_items = yt_collector.collect_all(os.environ["GROWKWIK_YOUTUBE_CHANNEL_ID"], channel_label="growkwik")
+
+    print("[Stage 1] Collecting GoKwik YouTube (brand channel)...")
+    gokwik_items = yt_collector.collect_all(os.environ["GOKWIK_YOUTUBE_CHANNEL_ID"], channel_label="gokwik")
+
+    yt_items = growkwik_items + gokwik_items
 
     print("[Stage 1] Collecting Instagram...")
     ig_items = ig_collector.collect_all()
@@ -155,7 +165,39 @@ def stage3_report(agency_context, content_themes, audience_profile, gokwik_value
     print("  Site:        site/index.html (open locally or deploy to GitHub Pages)")
 
 
+def load_from_raw() -> list:
+    """Build content items from existing raw video JSON files, skipping API calls."""
+    print("\n=== STAGE 1: LOADING FROM EXISTING RAW DATA ===")
+    all_items = []
+    raw_dir = Path("data/raw/youtube")
+    comments_dir = raw_dir / "comments"
+    transcripts_dir = raw_dir / "transcripts"
+
+    for channel_label in ["growkwik", "gokwik"]:
+        videos_path = raw_dir / f"{channel_label}_videos.json"
+        if not videos_path.exists():
+            print(f"[load] No raw data for {channel_label}, skipping")
+            continue
+        videos = json.loads(videos_path.read_text())
+        print(f"[load] {channel_label}: {len(videos)} videos")
+        for video in videos:
+            vid_id = video.get("id", "")
+            comments_path = comments_dir / f"{vid_id}.json"
+            transcript_path = transcripts_dir / f"{vid_id}.txt"
+            comments = json.loads(comments_path.read_text()) if comments_path.exists() else []
+            transcript = transcript_path.read_text() if transcript_path.exists() else None
+            item = normalize_youtube_video(video, comments, transcript, source_channel=channel_label)
+            all_items.append(item)
+
+    save_normalized(all_items, str(AGENT_OUTPUT_DIR / "content_items.json"))
+    print(f"[load] Total items: {len(all_items)}")
+    return all_items
+
+
 if __name__ == "__main__":
-    items = stage1_collect()
+    if "--analyze" in sys.argv:
+        items = load_from_raw()
+    else:
+        items = stage1_collect()
     agency_context, content_themes, audience_profile, gokwik_value_map, engagement_stats = stage2_analyze(items)
     stage3_report(agency_context, content_themes, audience_profile, gokwik_value_map, engagement_stats)

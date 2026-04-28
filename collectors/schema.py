@@ -21,6 +21,7 @@ class Engagement:
 class ContentItem:
     id: str
     platform: str        # "youtube" | "instagram"
+    source_channel: str  # "gokwik" | "growkwik" | "instagram"
     type: str            # "video" | "reel" | "image" | "carousel"
     title: Optional[str]
     text: str
@@ -38,7 +39,8 @@ class ContentItem:
 def normalize_youtube_video(
     raw_video: dict,
     raw_comments: list[dict],
-    transcript: Optional[str]
+    transcript: Optional[str],
+    source_channel: str = "unknown",
 ) -> ContentItem:
     stats = raw_video.get("statistics", {})
     views = int(stats.get("viewCount", 0))
@@ -52,6 +54,7 @@ def normalize_youtube_video(
     return ContentItem(
         id=video_id,
         platform="youtube",
+        source_channel=source_channel,
         type="video",
         title=snippet.get("title"),
         text=snippet.get("description", ""),
@@ -93,6 +96,7 @@ def normalize_instagram_post(
     return ContentItem(
         id=raw_post.get("shortcode", ""),
         platform="instagram",
+        source_channel="instagram",
         type=post_type,
         title=None,
         text=caption,

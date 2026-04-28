@@ -1,5 +1,6 @@
 import json
 import re
+import ssl
 import subprocess
 import tempfile
 from pathlib import Path
@@ -27,7 +28,12 @@ class InstagramCollector:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         (self.output_dir / "comments").mkdir(exist_ok=True)
         (self.output_dir / "transcripts").mkdir(exist_ok=True)
+        # Disable SSL verification to handle Zscaler cert on corporate networks
+        ssl_ctx = ssl.create_default_context()
+        ssl_ctx.check_hostname = False
+        ssl_ctx.verify_mode = ssl.CERT_NONE
         self.loader = instaloader.Instaloader()
+        self.loader.context._session.verify = False
 
     def _classify_post_type(self, is_video: bool, media_count: int) -> str:
         if is_video:
