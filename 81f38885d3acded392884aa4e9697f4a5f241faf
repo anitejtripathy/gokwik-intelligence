@@ -1,0 +1,4 @@
+docs/assets/style.css
+  1512e163-8805-4758-85bf-7156236aee46:2026-04-28T17:34:13.880Z 17-19
+---
+{"schema_version": "authorship/3.0.0", "base_commit_sha": "HEAD~1", "prompts": {"1512e163-8805-4758-85bf-7156236aee46:2026-04-28T17:34:13.880Z": {"agent_id": {"tool": "claude_code", "model": ""}, "human_author": "anitej.tripathy@razorpay.com", "accepted_lines": 3, "overriden_lines": 0}}}
