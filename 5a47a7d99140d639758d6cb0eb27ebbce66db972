@@ -1,0 +1,8 @@
+collectors/instagram_collector.py
+  1512e163-8805-4758-85bf-7156236aee46:2026-04-28T12:48:14.091Z 3,31-34,36
+collectors/youtube_collector.py
+  1512e163-8805-4758-85bf-7156236aee46:2026-04-28T13:05:07.440Z 3,8-9,18-20,26,34,52,60,96-101,112-114,116,118,120,125,128
+run.py
+  1512e163-8805-4758-85bf-7156236aee46:2026-04-28T13:18:47.322Z 11-13,17,27,57-58,60-61,63,168-174,176-190,192-194,198-201
+---
+{"schema_version": "authorship/3.0.0", "base_commit_sha": "HEAD~1", "prompts": {"1512e163-8805-4758-85bf-7156236aee46:2026-04-28T12:48:14.091Z": {"agent_id": {"tool": "claude_code", "model": ""}, "human_author": "anitej.tripathy@razorpay.com", "accepted_lines": 6, "overriden_lines": 0}, "1512e163-8805-4758-85bf-7156236aee46:2026-04-28T13:05:07.440Z": {"agent_id": {"tool": "claude_code", "model": ""}, "human_author": "anitej.tripathy@razorpay.com", "accepted_lines": 24, "overriden_lines": 0}, "1512e163-8805-4758-85bf-7156236aee46:2026-04-28T13:18:47.322Z": {"agent_id": {"tool": "claude_code", "model": ""}, "human_author": "anitej.tripathy@razorpay.com", "accepted_lines": 39, "overriden_lines": 0}}}
