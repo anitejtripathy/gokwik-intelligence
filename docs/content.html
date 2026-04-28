@@ -2,72 +2,179 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Content Analysis — GoKwik Intelligence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Inventory — GoKwik Intelligence</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <nav>
-  <a class="brand" href="index.html">GoKwik Intelligence</a>
-  <a href="index.html">Overview</a>
+  <a class="nav-brand" href="index.html">GoKwik Intelligence</a>
+  <a href="index.html">Brief</a>
   <a href="agency.html">Agency Model</a>
+  <a href="channels.html">Channels</a>
   <a href="content.html" class="active">Content</a>
   <a href="audience.html">Audience</a>
   <a href="value-map.html">Value Map</a>
   <a href="engagement.html">Engagement</a>
 </nav>
-<div class="container">
-  <h1>Content Analysis</h1>
-  <div class="stat-grid" id="theme-stats"></div>
-  <h2>Content Inventory</h2>
-  <div class="filter-bar">
-    <select id="filter-platform"><option value="">All Platforms</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select>
-    <select id="filter-theme"><option value="">All Themes</option>
-      <option value="brand_integration">Brand Integration</option>
-      <option value="gokwik_feature_push">GoKwik Feature Push</option>
-      <option value="thought_leadership">Thought Leadership</option>
-      <option value="merchant_testimonial">Merchant Testimonial</option>
-      <option value="lead_gen">Lead Gen</option>
-      <option value="community_building">Community Building</option>
-    </select>
-  </div>
-  <div class="table-wrapper">
-    <table>
-      <thead><tr><th>Platform</th><th>Primary Theme</th><th>Evidence</th><th>Engagement Rate</th><th>Link</th></tr></thead>
-      <tbody id="content-table"></tbody>
-    </table>
-  </div>
+
+<div class="page-hero">
+  <div class="eyebrow">Content Analysis · 600 Videos · GrowKwik + GoKwik</div>
+  <h1>Full <em>Content Inventory</em></h1>
+  <p style="margin-top:1rem;max-width:600px;font-size:0.95rem;color:var(--muted);line-height:1.7;">
+    Every video classified by channel and content theme. Filter by channel to compare the agency content (GrowKwik) against GoKwik's own brand channel. All YouTube links open the actual video.
+  </p>
 </div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="label">Theme Distribution</div>
+    <h2>What Was Published</h2>
+    <div class="stat-grid" id="theme-stats"></div>
+  </div>
+
+  <div class="section">
+    <div class="label">Content Inventory</div>
+    <h2>All 600 Videos</h2>
+    <div class="filter-bar">
+      <select id="filter-channel">
+        <option value="">All Channels</option>
+        <option value="growkwik">GrowKwik (Agency)</option>
+        <option value="gokwik">GoKwik (Brand)</option>
+      </select>
+      <select id="filter-theme">
+        <option value="">All Themes</option>
+        <option value="gokwik_feature_push">GoKwik Feature Push</option>
+        <option value="thought_leadership">Thought Leadership</option>
+        <option value="brand_integration">Brand Integration</option>
+        <option value="merchant_testimonial">Merchant Testimonial</option>
+        <option value="lead_gen">Lead Gen</option>
+        <option value="community_building">Community Building</option>
+      </select>
+      <input type="text" id="filter-search" placeholder="Search title..." style="flex:1;min-width:160px">
+    </div>
+    <div style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;color:var(--muted);margin-bottom:0.75rem" id="row-count"></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Channel</th>
+            <th>Title</th>
+            <th>Theme</th>
+            <th>Views</th>
+            <th>Engagement</th>
+            <th>Published</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody id="content-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <span class="footer-text">Razorpay · Domestic Payments · April 2025 · 600 videos analyzed</span>
+  <div class="footer-links">
+    <a href="agency.html">Agency Model</a>
+    <a href="channels.html">Channels</a>
+    <a href="audience.html">Audience</a>
+    <a href="value-map.html">Value Map</a>
+    <a href="engagement.html">Engagement</a>
+  </div>
+</footer>
+
 <script>
 let allItems = [];
-fetch('data/content_themes.json').then(r => r.json()).then(themes => {
-  allItems = themes.items || [];
-  const freq = themes.theme_frequency || {};
-  document.getElementById('theme-stats').innerHTML = Object.entries(freq).map(([k, v]) =>
-    `<div class="stat-card"><div class="value">${v}</div><div class="label">${k.replace(/_/g,' ')}</div></div>`
-  ).join('');
-  renderTable(allItems);
-  document.getElementById('filter-platform').addEventListener('change', filter);
-  document.getElementById('filter-theme').addEventListener('change', filter);
-});
+let themeMap = {};
 
-function filter() {
-  const plat = document.getElementById('filter-platform').value;
-  const theme = document.getElementById('filter-theme').value;
-  renderTable(allItems.filter(i => (!plat || i.platform === plat) && (!theme || (i.themes||[]).includes(theme))));
+const TC = {
+  brand_integration: '#a070d0', thought_leadership: '#5888d0',
+  gokwik_feature_push: '#e05080', merchant_testimonial: '#3a8a60',
+  lead_gen: '#c8943a', community_building: '#b87820'
+};
+
+function ytUrl(item) {
+  if (item.url && item.url.startsWith('http')) return item.url;
+  if (item.platform === 'youtube') return 'https://youtube.com/watch?v=' + item.id;
+  if (item.platform === 'instagram') return 'https://instagram.com/p/' + item.id + '/';
+  return '#';
 }
-
-const THEME_BADGE = {brand_integration:'badge-pink', gokwik_feature_push:'badge-blue', thought_leadership:'badge-yellow', merchant_testimonial:'badge-green', lead_gen:'badge-pink', community_building:'badge-yellow'};
 
 function renderTable(items) {
-  document.getElementById('content-table').innerHTML = items.map(item => `
-    <tr>
-      <td><span class="badge badge-blue">${item.platform||''}</span></td>
-      <td><span class="badge ${THEME_BADGE[item.primary_theme]||'badge-blue'}">${(item.primary_theme||'').replace(/_/g,' ')}</span></td>
-      <td style="max-width:300px;font-size:0.8rem;color:var(--muted)">${item.theme_evidence||''}</td>
-      <td>${item.engagement_rate !== undefined ? (item.engagement_rate*100).toFixed(1)+'%' : '—'}</td>
-      <td><a href="${item.url||'#'}" target="_blank" style="color:var(--accent);font-size:0.8rem">View ↗</a></td>
-    </tr>`).join('');
+  document.getElementById('row-count').textContent = items.length + ' videos shown';
+  document.getElementById('content-table').innerHTML = items.map(item => {
+    const theme = item.primary_theme || item.theme || 'unknown';
+    const url = ytUrl(item);
+    const views = item.engagement ? (item.engagement.views || 0) : 0;
+    const er = item.engagement ? (item.engagement.engagement_rate || 0) : 0;
+    const pub = (item.published_at || '').substring(0, 10) || '—';
+    const title = item.title || item.text || '—';
+    return '<tr>' +
+      '<td><span class="channel-chip ' + (item.source_channel||'unknown') + '">' + (item.source_channel||'—') + '</span></td>' +
+      '<td class="td-title" title="' + title.replace(/"/g,'&quot;') + '">' + title.substring(0,60) + (title.length>60?'…':'') + '</td>' +
+      '<td><span class="theme-chip ' + theme + '">' + theme.replace(/_/g,' ') + '</span></td>' +
+      '<td class="td-muted">' + (views > 0 ? views.toLocaleString() : '—') + '</td>' +
+      '<td class="td-muted">' + (er > 0 ? (er*100).toFixed(1)+'%' : '—') + '</td>' +
+      '<td class="td-muted">' + pub + '</td>' +
+      '<td><a class="yt-link" href="' + url + '" target="_blank" rel="noopener">Watch &#x2197;</a></td>' +
+      '</tr>';
+  }).join('');
 }
+
+function applyFilters() {
+  const ch = document.getElementById('filter-channel').value;
+  const th = document.getElementById('filter-theme').value;
+  const q = document.getElementById('filter-search').value.toLowerCase();
+  const filtered = allItems.filter(i => {
+    if (ch && i.source_channel !== ch) return false;
+    const theme = i.primary_theme || i.theme || '';
+    if (th && theme !== th) return false;
+    if (q) {
+      const title = (i.title || i.text || '').toLowerCase();
+      if (!title.includes(q)) return false;
+    }
+    return true;
+  });
+  renderTable(filtered);
+}
+
+Promise.all([
+  fetch('data/content_items.json').then(r => r.json()),
+  fetch('data/content_themes.json').then(r => r.json())
+]).then(([items, themes]) => {
+  // Build theme lookup from content_themes
+  (themes.items || []).forEach(ti => {
+    themeMap[ti.id] = ti.primary_theme;
+  });
+  
+  // Merge: attach theme classification to content items
+  allItems = items.map(item => ({
+    ...item,
+    primary_theme: themeMap[item.id] || 'unknown'
+  }));
+  
+  // Theme frequency stats
+  const freq = {};
+  allItems.forEach(i => {
+    const t = i.primary_theme || 'unknown';
+    freq[t] = (freq[t] || 0) + 1;
+  });
+  const sorted = Object.entries(freq).sort((a,b) => b[1]-a[1]);
+  document.getElementById('theme-stats').innerHTML = sorted.map(([k,v]) =>
+    '<div class="stat-cell"><span class="stat-num" style="font-size:2rem;color:' + (TC[k]||'#7a7468') + '">' + v + '</span>' +
+    '<span class="stat-name">' + k.replace(/_/g,' ') + '</span></div>'
+  ).join('');
+  
+  renderTable(allItems);
+  
+  ['filter-channel', 'filter-theme'].forEach(id =>
+    document.getElementById(id).addEventListener('change', applyFilters)
+  );
+  document.getElementById('filter-search').addEventListener('input', applyFilters);
+});
 </script>
 </body>
 </html>
