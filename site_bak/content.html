@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Content Analysis — GoKwik Intelligence</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav>
+  <a class="brand" href="index.html">GoKwik Intelligence</a>
+  <a href="index.html">Overview</a>
+  <a href="agency.html">Agency Model</a>
+  <a href="content.html" class="active">Content</a>
+  <a href="audience.html">Audience</a>
+  <a href="value-map.html">Value Map</a>
+  <a href="engagement.html">Engagement</a>
+</nav>
+<div class="container">
+  <h1>Content Analysis</h1>
+  <div class="stat-grid" id="theme-stats"></div>
+  <h2>Content Inventory</h2>
+  <div class="filter-bar">
+    <select id="filter-platform"><option value="">All Platforms</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option></select>
+    <select id="filter-theme"><option value="">All Themes</option>
+      <option value="brand_integration">Brand Integration</option>
+      <option value="gokwik_feature_push">GoKwik Feature Push</option>
+      <option value="thought_leadership">Thought Leadership</option>
+      <option value="merchant_testimonial">Merchant Testimonial</option>
+      <option value="lead_gen">Lead Gen</option>
+      <option value="community_building">Community Building</option>
+    </select>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Platform</th><th>Primary Theme</th><th>Evidence</th><th>Engagement Rate</th><th>Link</th></tr></thead>
+      <tbody id="content-table"></tbody>
+    </table>
+  </div>
+</div>
+<script>
+let allItems = [];
+fetch('data/content_themes.json').then(r => r.json()).then(themes => {
+  allItems = themes.items || [];
+  const freq = themes.theme_frequency || {};
+  document.getElementById('theme-stats').innerHTML = Object.entries(freq).map(([k, v]) =>
+    `<div class="stat-card"><div class="value">${v}</div><div class="label">${k.replace(/_/g,' ')}</div></div>`
+  ).join('');
+  renderTable(allItems);
+  document.getElementById('filter-platform').addEventListener('change', filter);
+  document.getElementById('filter-theme').addEventListener('change', filter);
+});
+
+function filter() {
+  const plat = document.getElementById('filter-platform').value;
+  const theme = document.getElementById('filter-theme').value;
+  renderTable(allItems.filter(i => (!plat || i.platform === plat) && (!theme || (i.themes||[]).includes(theme))));
+}
+
+const THEME_BADGE = {brand_integration:'badge-pink', gokwik_feature_push:'badge-blue', thought_leadership:'badge-yellow', merchant_testimonial:'badge-green', lead_gen:'badge-pink', community_building:'badge-yellow'};
+
+function renderTable(items) {
+  document.getElementById('content-table').innerHTML = items.map(item => `
+    <tr>
+      <td><span class="badge badge-blue">${item.platform||''}</span></td>
+      <td><span class="badge ${THEME_BADGE[item.primary_theme]||'badge-blue'}">${(item.primary_theme||'').replace(/_/g,' ')}</span></td>
+      <td style="max-width:300px;font-size:0.8rem;color:var(--muted)">${item.theme_evidence||''}</td>
+      <td>${item.engagement_rate !== undefined ? (item.engagement_rate*100).toFixed(1)+'%' : '—'}</td>
+      <td><a href="${item.url||'#'}" target="_blank" style="color:var(--accent);font-size:0.8rem">View ↗</a></td>
+    </tr>`).join('');
+}
+</script>
+</body>
+</html>

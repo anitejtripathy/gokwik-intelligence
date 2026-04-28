@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Engagement — GoKwik Intelligence</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="index.html">GoKwik Intelligence</a>
+  <a href="index.html">Overview</a>
+  <a href="agency.html">Agency Model</a>
+  <a href="content.html">Content</a>
+  <a href="audience.html">Audience</a>
+  <a href="value-map.html">Value Map</a>
+  <a href="engagement.html" class="active">Engagement</a>
+</nav>
+<div class="container">
+  <h1>Engagement Analytics</h1>
+  <div class="stat-grid" id="eng-stats"></div>
+  <h2>Avg Engagement Rate by Theme</h2>
+  <div class="chart-container"><canvas id="theme-chart" height="80"></canvas></div>
+  <h2>Views by Platform</h2>
+  <div class="chart-container"><canvas id="platform-chart" height="80"></canvas></div>
+  <h2>Top 10 Posts</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Platform</th><th>Theme</th><th>Engagement Rate</th><th>Views</th><th>Published</th><th>Link</th></tr></thead>
+      <tbody id="top-posts-table"></tbody>
+    </table>
+  </div>
+</div>
+<script>
+const ACCENT = '#4f6ef7', ACCENT2 = '#e84c88', MUTED = '#8890a6';
+const chartDefaults = { plugins: { legend: { labels: { color: '#e8eaf0' } } }, scales: { x: { ticks: { color: MUTED }, grid: { color: '#2a2d3e' } }, y: { ticks: { color: MUTED }, grid: { color: '#2a2d3e' } } } };
+
+fetch('data/engagement_stats.json').then(r => r.json()).then(data => {
+  document.getElementById('eng-stats').innerHTML = `
+    <div class="stat-card"><div class="value">${data.total_post_count||0}</div><div class="label">Total Posts</div></div>
+    <div class="stat-card"><div class="value">${(data.total_estimated_reach||0).toLocaleString()}</div><div class="label">Est. Total Reach</div></div>
+    ${Object.entries(data.by_platform||{}).map(([p,s]) =>
+      `<div class="stat-card"><div class="value">${((s.avg_engagement_rate||0)*100).toFixed(1)}%</div><div class="label">${p} Avg Engagement</div></div>`
+    ).join('')}
+  `;
+
+  const themes = Object.entries(data.by_theme||{});
+  new Chart(document.getElementById('theme-chart'), {
+    type: 'bar',
+    data: {
+      labels: themes.map(([k]) => k.replace(/_/g,' ')),
+      datasets: [{
+        label: 'Avg Engagement Rate',
+        data: themes.map(([,v]) => ((v.avg_engagement_rate||0)*100).toFixed(2)),
+        backgroundColor: ACCENT,
+      }]
+    },
+    options: { ...chartDefaults, indexAxis: 'y' }
+  });
+
+  const platforms = Object.entries(data.by_platform||{});
+  new Chart(document.getElementById('platform-chart'), {
+    type: 'doughnut',
+    data: {
+      labels: platforms.map(([k]) => k),
+      datasets: [{ data: platforms.map(([,v]) => v.total_views||0), backgroundColor: [ACCENT, ACCENT2] }]
+    },
+    options: { plugins: { legend: { labels: { color: '#e8eaf0' } } } }
+  });
+
+  document.getElementById('top-posts-table').innerHTML = (data.top_10_posts||[]).map(p => `
+    <tr>
+      <td><span class="badge badge-blue">${p.platform}</span></td>
+      <td>${(p.theme||'').replace(/_/g,' ')||'—'}</td>
+      <td>${((p.engagement_rate||0)*100).toFixed(1)}%</td>
+      <td>${(p.views||0).toLocaleString()}</td>
+      <td style="font-size:0.8rem;color:var(--muted)">${(p.published_at||'').substring(0,10)||'—'}</td>
+      <td><a href="${p.url||'#'}" target="_blank" style="color:var(--accent);font-size:0.8rem">↗</a></td>
+    </tr>`).join('');
+});
+</script>
+</body>
+</html>

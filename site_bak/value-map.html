@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GoKwik Value Map — GoKwik Intelligence</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav>
+  <a class="brand" href="index.html">GoKwik Intelligence</a>
+  <a href="index.html">Overview</a>
+  <a href="agency.html">Agency Model</a>
+  <a href="content.html">Content</a>
+  <a href="audience.html">Audience</a>
+  <a href="value-map.html" class="active">Value Map</a>
+  <a href="engagement.html">Engagement</a>
+</nav>
+<div class="container">
+  <h1>What GoKwik Gets</h1>
+  <p class="subtitle" id="assessment">Loading...</p>
+  <div id="benefits"></div>
+</div>
+<script>
+fetch('data/gokwik_value_map.json').then(r => r.json()).then(data => {
+  document.getElementById('assessment').textContent = data.overall_strategic_assessment || '';
+  document.getElementById('benefits').innerHTML = (data.benefits||[]).map(b => `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem">
+        <h3 style="color:var(--text);margin:0">${b.type}</h3>
+        <span class="badge badge-blue">freq: ${b.frequency||0}</span>
+      </div>
+      <p>${b.description}</p>
+      <p style="font-size:0.8rem;color:var(--warning)">Scale: ${b.estimated_scale||'—'}</p>
+      <ul class="summary-list" style="margin-top:0.5rem">
+        ${(b.evidence||[]).map(e => `<li style="font-size:0.8rem">${e}</li>`).join('')}
+      </ul>
+    </div>`).join('');
+});
+</script>
+</body>
+</html>

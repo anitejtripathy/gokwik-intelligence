@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audience Intelligence — GoKwik Intelligence</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<nav>
+  <a class="brand" href="index.html">GoKwik Intelligence</a>
+  <a href="index.html">Overview</a>
+  <a href="agency.html">Agency Model</a>
+  <a href="content.html">Content</a>
+  <a href="audience.html" class="active">Audience</a>
+  <a href="value-map.html">Value Map</a>
+  <a href="engagement.html">Engagement</a>
+</nav>
+<div class="container">
+  <h1>D2C Audience Intelligence</h1>
+  <div class="stat-grid" id="audience-stats"></div>
+  <h2>Top D2C Engagers</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Username</th><th>Platform</th><th>Bio</th><th>Comment</th><th>Intent Signal</th></tr></thead>
+      <tbody id="engagers-table"></tbody>
+    </table>
+  </div>
+  <h2>High-Intent Comments</h2>
+  <div id="intent-comments"></div>
+</div>
+<script>
+fetch('data/audience_profile.json').then(r => r.json()).then(data => {
+  document.getElementById('audience-stats').innerHTML = `
+    <div class="stat-card"><div class="value">${data.total_unique_commenters||0}</div><div class="label">Unique Commenters</div></div>
+    <div class="stat-card"><div class="value">${data.d2c_brand_count||0}</div><div class="label">D2C Brands</div></div>
+    <div class="stat-card"><div class="value">${data.merchant_individual_count||0}</div><div class="label">Merchant Individuals</div></div>
+    <div class="stat-card"><div class="value">${data.consumer_count||0}</div><div class="label">Consumers</div></div>
+    <div class="stat-card"><div class="value">${(data.intent_signal_comments||[]).length}</div><div class="label">Intent Signals</div></div>
+  `;
+  document.getElementById('engagers-table').innerHTML = (data.top_d2c_engagers||[]).map(e => `
+    <tr>
+      <td><strong>@${e.username}</strong></td>
+      <td><span class="badge badge-blue">${e.platform}</span></td>
+      <td style="font-size:0.8rem;color:var(--muted);max-width:200px">${e.bio||'—'}</td>
+      <td style="font-size:0.8rem;max-width:250px">${e.comment||'—'}</td>
+      <td>${e.intent_signal ? `<span class="intent-chip">${e.intent_signal}</span>` : '—'}</td>
+    </tr>`).join('');
+  document.getElementById('intent-comments').innerHTML = (data.intent_signal_comments||[]).map(c => `
+    <div class="card" style="margin-bottom:0.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+        <strong>@${c.username}</strong>
+        <span class="intent-chip">${c.signal_type}</span>
+      </div>
+      <p style="margin:0">"${c.comment}"</p>
+    </div>`).join('');
+});
+</script>
+</body>
+</html>
