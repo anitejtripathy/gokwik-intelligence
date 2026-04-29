@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Value Map — GoKwik Intelligence</title>
+  <title>Value Map &mdash; GoKwik Intelligence</title>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="assets/style.css">
+  <script>document.addEventListener('DOMContentLoaded',function(){var a=document.querySelector('nav a.active');if(a)a.scrollIntoView({block:'nearest',inline:'center'});});</script>
 </head>
 <body>
 <nav>
@@ -19,51 +20,55 @@
   <a href="value-map.html" class="active">Value Map</a>
   <a href="engagement.html">Engagement</a>
 </nav>
-
 <div class="page-hero">
   <div class="eyebrow">What GoKwik Extracts &middot; Quantified</div>
   <h1>What GoKwik <em>Actually Gets</em></h1>
-  <p style="margin-top:1rem;max-width:640px;font-size:0.95rem;color:var(--muted);line-height:1.7;">
-    Every benefit GoKwik extracts from the GrowKwik content operation, quantified and sourced from the agent analysis.
-  </p>
+  <p style="margin-top:1rem;max-width:640px;font-size:0.95rem;color:var(--muted);line-height:1.7;">Every benefit GoKwik extracts from the GrowKwik operation, quantified and sourced. Where evidence references a specific video, a direct link is provided.</p>
 </div>
-
 <div class="container">
-
   <div class="section">
     <div class="label">Strategic Assessment</div>
     <h2>Overall Value to GoKwik</h2>
-    <div class="card card-gold" id="assessment"></div>
+    <div class="card card-gold" id="assessment"><p style="color:var(--muted)">Loading&hellip;</p></div>
   </div>
-
   <div class="section">
     <div class="label">Benefit Breakdown</div>
     <h2>What GoKwik Gets &mdash; by Category</h2>
     <div id="benefits"></div>
   </div>
-
 </div>
-
-<footer class="site-footer">
-  <span class="footer-text">Razorpay &middot; Domestic Payments Intelligence &middot; April 2025 &middot; 600 videos analyzed (YouTube) &middot; Instagram analysis pending</span>
-  <div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div>
-</footer>
-
+<footer class="site-footer"><span class="footer-text">Razorpay &middot; Domestic Payments &middot; April 2025 &middot; 600 videos (YouTube) &middot; Instagram not yet analyzed</span><div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div></footer>
 <script>
-fetch('data/gokwik_value_map.json').then(r=>r.json()).then(data=>{
-  document.getElementById('assessment').innerHTML = '<p style="font-size:0.95rem;color:var(--text);line-height:1.85">'+(data.overall_strategic_assessment||'')+'</p>';
-  const icons=['&#x1F3AF;','&#x1F4CB;','&#x1F30D;','&#x1F504;','&#x1F4E3;','&#x1F4C8;'];
-  const titles=['App Install Leads','Merchant Pipeline','Brand Credibility','Organic Reach','Network Effect','Competitive Moat'];
-  document.getElementById('benefits').innerHTML=(data.benefits||[]).map((b,i)=>{
-    const evItems=(b.evidence||[]).map(e=>{
-      // Convert any raw video IDs to YouTube links
-      return e.replace(/([A-Za-z0-9_-]{11})/g,(m)=>
-        /^[A-Za-z0-9_-]{11}$/.test(m)?'<a href="https://youtube.com/watch?v='+m+'" target="_blank" rel="noopener" style="color:var(--gold)">Video &nearr;</a>':m
-      );
+fetch('data/gokwik_value_map.json').then(function(r){return r.json();}).then(function(data){
+  document.getElementById('assessment').innerHTML='<p style="font-size:0.95rem;color:var(--text);line-height:1.85">'+(data.overall_strategic_assessment||'')+'</p>';
+  var icons=['&#x1F3AF;','&#x1F4CB;','&#x1F30D;','&#x1F504;','&#x1F4E3;','&#x1F4C8;'];
+  var titles=['App Install Leads','Merchant Pipeline','Brand Credibility','Organic Reach','Network Effect','Competitive Moat'];
+
+  function linkifyEvidence(text){
+    // Replace 11-char video IDs with YouTube links
+    return text.replace(/([A-Za-z0-9_\-]{11})/g,function(m){
+      if(/^[A-Za-z0-9_\-]{11}$/.test(m)){
+        return '<a href="https://youtube.com/watch?v='+m+'" target="_blank" rel="noopener" style="color:var(--gold);font-family:var(--mono);font-size:0.85em">[Watch on YouTube &#x2197;]</a>';
+      }
+      return m;
     });
-    return '<div class="card" style="margin-bottom:0.75rem"><div style="display:flex;gap:1rem;align-items:flex-start"><div style="font-size:1.75rem;flex-shrink:0">'+(icons[i]||'&#x1F4CC;')+'</div><div style="flex:1"><div style="font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.5rem">'+(titles[i]||('Benefit '+(i+1)))+'</div><div style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;color:var(--gold);margin-bottom:0.5rem;text-transform:uppercase">'+( b.estimated_scale||'')+'</div>'+(b.description?'<p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.75rem">'+b.description+'</p>':'')+(evItems.length?'<ul style="list-style:none;padding:0">'+evItems.map(e=>'<li style="font-size:0.78rem;color:var(--muted-2);padding:0.3rem 0;border-top:1px solid var(--border)">'+e+'</li>').join('')+'</ul>':'')+'</div></div></div>';
+  }
+
+  document.getElementById('benefits').innerHTML=(data.benefits||[]).map(function(b,i){
+    var evHtml=(b.evidence||[]).map(function(e){
+      return '<li style="font-size:0.78rem;color:var(--muted-2);padding:0.35rem 0;border-top:1px solid var(--border)">'+linkifyEvidence(e)+'</li>';
+    }).join('');
+    return '<div class="card" style="margin-bottom:0.75rem">'+
+      '<div style="display:flex;gap:1rem;align-items:flex-start">'+
+      '<div style="font-size:1.75rem;flex-shrink:0">'+(icons[i]||'&#x1F4CC;')+'</div>'+
+      '<div style="flex:1">'+
+      '<div style="font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:0.4rem">'+(titles[i]||'Benefit '+(i+1))+'</div>'+
+      (b.estimated_scale?'<div style="font-family:var(--mono);font-size:0.65rem;letter-spacing:0.06em;color:var(--gold);margin-bottom:0.5rem;text-transform:uppercase">'+b.estimated_scale+'</div>':'')+
+      (b.description?'<p style="font-size:0.85rem;color:var(--muted);margin-bottom:'+(evHtml?'0.75rem':'0')+'">'+b.description+'</p>':'')+
+      (evHtml?'<ul style="list-style:none;padding:0">'+evHtml+'</ul>':'')+
+      '</div></div></div>';
   }).join('');
-}).catch(e=>console.error(e));
+}).catch(function(e){console.error(e);});
 </script>
 </body>
 </html>

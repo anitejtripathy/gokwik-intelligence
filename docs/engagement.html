@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engagement Analytics — GoKwik Intelligence</title>
+  <title>Engagement Analytics &mdash; GoKwik Intelligence</title>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="assets/style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4" defer></script>
+  <script>document.addEventListener('DOMContentLoaded',function(){var a=document.querySelector('nav a.active');if(a)a.scrollIntoView({block:'nearest',inline:'center'});});</script>
 </head>
 <body>
 <nav>
@@ -20,83 +21,98 @@
   <a href="value-map.html">Value Map</a>
   <a href="engagement.html" class="active">Engagement</a>
 </nav>
-
 <div class="page-hero">
   <div class="eyebrow">Engagement Analytics &middot; YouTube Only</div>
   <h1><em>Engagement</em> Deep Dive</h1>
-  <p style="margin-top:1rem;max-width:640px;font-size:0.95rem;color:var(--muted);line-height:1.7;">
-    View counts, engagement rates, and top-performing posts across both channels.
-  </p>
+  <p style="margin-top:1rem;max-width:640px;font-size:0.95rem;color:var(--muted);line-height:1.7;">View counts and engagement rates across both channels. All YouTube &mdash; Instagram not yet analyzed.</p>
 </div>
-
 <div class="container">
-
   <div class="section">
     <div class="label">Key Metrics</div>
     <h2>Platform Overview</h2>
-    <div class="stat-grid" id="eng-stats"></div>
+    <div class="stat-grid" id="eng-stats"><div class="stat-cell"><span class="stat-num">&#x2026;</span><span class="stat-name">Loading</span></div></div>
   </div>
-
   <div class="section">
     <div class="label">Performance by Theme</div>
     <h2>Theme Analysis</h2>
-    <div class="chart-grid">
-      <div class="chart-box">
-        <h3>Avg Engagement Rate by Theme</h3>
-        <canvas id="theme-chart" height="100"></canvas>
-      </div>
-      <div class="chart-box">
-        <h3>Views by Platform</h3>
-        <canvas id="platform-chart" height="100"></canvas>
-      </div>
+    <div class="chart-box" style="margin-bottom:1.5rem">
+      <h3>Avg Engagement Rate by Theme</h3>
+      <canvas id="theme-chart" height="100"></canvas>
     </div>
   </div>
-
   <div class="section">
-    <div class="label">Top Posts</div>
-    <h2>Top 10 Performing Videos</h2>
+    <div class="label">Top Performers</div>
+    <h2>Top 10 Videos by Engagement Rate</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Channel</th><th>Theme</th><th>Engagement</th><th>Views</th><th>Published</th><th>Link</th></tr></thead>
-        <tbody id="top-posts-table"></tbody>
+        <thead><tr><th>Channel</th><th>Title</th><th>Theme</th><th>Engagement</th><th>Views</th><th>Date</th><th>Link</th></tr></thead>
+        <tbody id="top-posts-table"><tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted)">Loading&hellip;</td></tr></tbody>
       </table>
     </div>
   </div>
-
 </div>
-
-<footer class="site-footer">
-  <span class="footer-text">Razorpay &middot; Domestic Payments Intelligence &middot; April 2025 &middot; 600 videos analyzed (YouTube) &middot; Instagram analysis pending</span>
-  <div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div>
-</footer>
-
+<footer class="site-footer"><span class="footer-text">Razorpay &middot; Domestic Payments &middot; April 2025 &middot; 600 videos (YouTube) &middot; Instagram not yet analyzed</span><div class="footer-links"><a href="agency.html">Agency Model</a> <a href="channels.html">Channels</a> <a href="razorpay-gap.html">Razorpay Gap</a> <a href="content.html">Content</a> <a href="audience.html">Audience</a> <a href="value-map.html">Value Map</a> <a href="engagement.html">Engagement</a></div></footer>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-  const G='#c8943a',B='#5888d0',P='#e05080',V='#a070d0',K='#3a8a60',W='#b87820',M='#7a7468';
-  const TC={brand_integration:V,thought_leadership:B,gokwik_feature_push:P,merchant_testimonial:K,lead_gen:G,community_building:W};
-  const co={plugins:{legend:{labels:{color:'#ede8df'}}},scales:{x:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}},y:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}}}};
+  var G='#c8943a',B='#5888d0',P='#e05080',V='#a070d0',K='#3a8a60',W='#b87820',M='#7a7468';
+  var TC={brand_integration:V,thought_leadership:B,gokwik_feature_push:P,merchant_testimonial:K,lead_gen:G,community_building:W};
+  var co={plugins:{legend:{display:false}},scales:{x:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}},y:{ticks:{color:M,font:{size:10}},grid:{color:'#1e1e2e'}}}};
 
-  fetch('data/engagement_stats.json').then(r=>r.json()).then(data=>{
-    document.getElementById('eng-stats').innerHTML = [
-      {n:data.total_post_count||0,l:'Total Posts',s:'YouTube analyzed'},
-      {n:(data.total_estimated_reach||0).toLocaleString(),l:'Est. Total Reach',s:'views accumulated'},
-      ...Object.entries(data.by_platform||{}).map(([p,s])=>{
-        return {n:((s.avg_engagement_rate||0)*100).toFixed(1)+'%',l:p+' Avg Engagement',s:'across all videos'};
-      })
-    ].map(s=>'<div class="stat-cell"><span class="stat-num" style="font-size:1.75rem">'+s.n+'</span><span class="stat-name">'+s.l+'</span><span class="stat-sub">'+s.s+'</span></div>').join('');
+  Promise.all([
+    fetch('data/engagement_stats.json').then(function(r){return r.json();}),
+    fetch('data/content_index.json').then(function(r){return r.json();})
+  ]).then(function(results){
+    var data=results[0];
+    var index=results[1];
 
-    const themes=Object.entries(data.by_theme||{});
+    // Build lookup: id -> source_channel + title
+    var idMap={};
+    index.forEach(function(i){idMap[i.id]={channel:i.source_channel,title:i.title,url:i.url};});
+
+    // Key stats
+    document.getElementById('eng-stats').innerHTML=[
+      {n:data.total_post_count||0,l:'Total Videos',s:'YouTube analyzed'},
+      {n:(data.total_estimated_reach||0).toLocaleString(),l:'Est. Total Views',s:'accumulated across all videos'},
+      {n:((Object.values(data.by_platform||{})[0]||{}).avg_engagement_rate*100||0).toFixed(1)+'%',l:'Avg Engagement Rate',s:'YouTube across all videos'},
+    ].map(function(s){return '<div class="stat-cell"><span class="stat-num" style="font-size:1.75rem">'+s.n+'</span><span class="stat-name">'+s.l+'</span><span class="stat-sub">'+s.s+'</span></div>';}).join('');
+
+    // Theme chart
+    var themes=Object.entries(data.by_theme||{});
     if(window.Chart){
-      new Chart(document.getElementById('theme-chart'),{type:'bar',data:{labels:themes.map(([k])=>k.replace(/_/g,' ')),datasets:[{label:'Avg Engagement Rate',data:themes.map(([,v])=>((v.avg_engagement_rate||0)*100).toFixed(2)),backgroundColor:themes.map(([k])=>TC[k]||M),borderRadius:2}]},options:{...co,indexAxis:'y',plugins:{legend:{display:false}}}});
-      const plats=Object.entries(data.by_platform||{});
-      new Chart(document.getElementById('platform-chart'),{type:'doughnut',data:{labels:plats.map(([k])=>k),datasets:[{data:plats.map(([,v])=>v.total_views||0),backgroundColor:[G,B]}]},options:co});
+      new Chart(document.getElementById('theme-chart'),{
+        type:'bar',
+        data:{
+          labels:themes.map(function(e){return e[0].replace(/_/g,' ');}),
+          datasets:[{label:'Avg Engagement %',data:themes.map(function(e){return (e[1].avg_engagement_rate*100).toFixed(2);}),backgroundColor:themes.map(function(e){return TC[e[0]]||M;}),borderRadius:2}]
+        },
+        options:Object.assign({},co,{indexAxis:'y'})
+      });
     }
 
-    document.getElementById('top-posts-table').innerHTML=(data.top_10_posts||[]).map(p=>{
-      const url=p.url&&p.url.startsWith('http')?p.url:'https://youtube.com/watch?v='+p.id;
-      return '<tr><td><span class="channel-chip '+(p.source_channel||'unknown')+'">'+(p.source_channel||'&mdash;')+'</span></td><td><span class="theme-chip '+( p.theme||'unknown')+'">'+(p.theme||'&mdash;').replace(/_/g,' ')+'</span></td><td>'+((p.engagement_rate||0)*100).toFixed(1)+'%</td><td>'+(p.views||0).toLocaleString()+'</td><td class="td-muted">'+(p.published_at||'').substring(0,7)||'&mdash;'+'</td><td><a class="yt-link" href="'+url+'" target="_blank" rel="noopener">Watch &#x2197;</a></td></tr>';
-    }).join('');
-  }).catch(e=>console.error(e));
+    // Top posts — enrich with channel + title from content_index
+    var posts=(data.top_10_posts||[]);
+    document.getElementById('top-posts-table').innerHTML=posts.length?posts.map(function(p){
+      var info=idMap[p.id]||{};
+      var channel=info.channel||p.source_channel||'unknown';
+      var title=(info.title||p.title||'Video '+p.id).substring(0,45);
+      var url=info.url&&info.url.startsWith('http')?info.url:(p.url&&p.url.startsWith('http')?p.url:'https://youtube.com/watch?v='+p.id);
+      var theme=p.theme||'unknown';
+      return '<tr>'+
+        '<td><span class="channel-chip '+channel+'">'+channel+'</span></td>'+
+        '<td class="td-title">'+title+'</td>'+
+        '<td><span class="theme-chip '+theme+'">'+theme.replace(/_/g,' ')+'</span></td>'+
+        '<td>'+((p.engagement_rate||0)*100).toFixed(1)+'%</td>'+
+        '<td class="td-muted">'+( p.views||0).toLocaleString()+'</td>'+
+        '<td class="td-muted">'+( p.published_at||'').substring(0,7)+'</td>'+
+        '<td><a class="yt-link" href="'+url+'" target="_blank" rel="noopener">Watch &#x2197;</a></td>'+
+        '</tr>';
+    }).join(''):
+    '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--muted)">No top posts data available.</td></tr>';
+
+  }).catch(function(e){
+    console.error(e);
+    document.getElementById('eng-stats').innerHTML='<div class="stat-cell"><span class="stat-name" style="color:var(--danger)">Error loading data</span></div>';
+  });
 });
 </script>
 </body>
